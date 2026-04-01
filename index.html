@@ -198,6 +198,9 @@
 
   .contact-label { font-size: 9px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
   .contact-value { font-size: 12px; color: var(--white); font-weight: 500; word-break: break-all; }
+  a { color: inherit; text-decoration: none; }
+  a:visited { color: inherit; }
+  a:hover { color: var(--gold2); }
 
   /* EXPERTISE */
   .tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -238,7 +241,17 @@
 <div class="card">
 
   <div class="card-header">
-    <div class="avatar">ACJ</div>
+    <div style="display:flex;justify-content:center;margin-bottom:14px;">
+      <svg width="110" height="80" viewBox="0 0 120 82" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="48" width="104" height="1.5" fill="#b8943f"/>
+        <text x="14" y="44" fill="#b8943f" font-family="Georgia,serif" font-size="38" font-weight="700">A</text>
+        <text x="42" y="44" fill="rgba(255,255,255,0.38)" font-family="Georgia,serif" font-size="38" font-weight="700">C</text>
+        <text x="70" y="44" fill="rgba(255,255,255,0.22)" font-family="Georgia,serif" font-size="38" font-weight="700">J</text>
+        <text x="14" y="62" fill="#ffffff" font-family="Georgia,serif" font-size="38" font-weight="700">A</text>
+        <text x="42" y="62" fill="#b8943f" font-family="Georgia,serif" font-size="38" font-weight="700">C</text>
+        <text x="70" y="62" fill="rgba(255,255,255,0.30)" font-family="Georgia,serif" font-size="38" font-weight="700">J</text>
+      </svg>
+    </div>
     <div class="name">Alcyone Cunha Junior</div>
     <div class="title1">Engenheiro Eletricista (Eletrônica)</div>
     <div class="title2">Engenheiro de Segurança do Trabalho</div>
@@ -262,7 +275,7 @@
         <div class="btn-arrow">›</div>
       </a>
 
-      <a href="CURRICULO_URL_AQUI" class="btn btn-cv">
+      <a href="https://alcyone-cunha-jr.github.io/curriculo.pdf" class="btn btn-cv">
         <div class="btn-icon">📄</div>
         <div class="btn-text">
           <span class="btn-label">Currículo Profissional</span>
@@ -290,7 +303,7 @@
       </div>
       <div class="contact-item">
         <div class="contact-label">E-mail</div>
-        <div class="contact-value">alcyone.cunha.junior@hotmail.com</div>
+        <div class="contact-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6908050a1006070c470a1c07010847031c0700061b2901061d04080005470a0604">[email&#160;protected]</a></div>
       </div>
       <div class="contact-item">
         <div class="contact-label">Localização</div>
@@ -315,11 +328,4 @@
 
   </div>
 
-  <div class="card-footer">
-    © 2025 Alcyone Cunha Junior · CREA-RJ 1985104856 · CREA-SC 222656-5 · RNP 2001887744
-  </div>
-
-</div>
-
-</body>
-</html>
+  <div class="card-f
