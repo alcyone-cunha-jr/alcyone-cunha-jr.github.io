@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartão de Visitas – Alcyone Cunha Junior</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --navy: #0d1b2e;
+    --navy2: #162542;
+    --gold: #b8943f;
+    --gold2: #d4af6a;
+    --red: #c0392b;
+    --white: #ffffff;
+    --cream: #f8f4ed;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: #d0cfc8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  .page-sub {
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+    color: #666;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 10px;
+  }
+
+  .print-hint {
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  /* CARD DIMENSIONS: 9cm x 5cm at 96dpi ≈ 340px x 189px
+     For screen readability we scale 2x: 680px x 378px */
+  .card-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #888;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .card {
+    width: 680px;
+    height: 378px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  /* ═══ FRENTE ═══ */
+  .front {
+    background: var(--navy);
+    display: grid;
+    grid-template-columns: 1fr 210px;
+    height: 100%;
+  }
+
+  .front-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    display: flex;
+    z-index: 10;
+  }
+  .fs-gold { flex: 3; background: var(--gold); }
+  .fs-red  { flex: 1; background: var(--red); }
+
+  .front-left {
+    padding: 38px 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .front-top { }
+
+  .f-label {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  .f-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .f-title1 {
+    font-size: 11px;
+    color: var(--gold2);
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+  }
+
+  .f-title2 {
+    font-size: 11px;
+    color: rgba(210,80,70,0.9);
+    letter-spacing: 1px;
+  }
+
+  .f-divider {
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold) 60%, var(--red) 100%);
+    margin: 16px 0;
+  }
+
+  .f-contact { }
+
+  .f-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .f-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+  }
+
+  .f-cval {
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .f-cval strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:visited { color: inherit; }
+  a:hover { opacity: 0.85; }
+
+  .front-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .f-crea {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  /* RIGHT SIDE — QR */
+  .front-right {
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 20px;
+    gap: 14px;
+    border-left: 1px solid rgba(184,148,63,0.2);
+  }
+
+  .qr-label-top {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+  }
+
+  #qrcode-front {
+    background: white;
+    padding: 8px;
+    border-radius: 6px;
+    border: 2px solid var(--gold);
+  }
+
+  #qrcode-front canvas, #qrcode-front img { display: block; }
+
+  .qr-label-bottom {
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .qr-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .qr-icon-pill {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(184,148,63,0.4);
+    color: var(--gold2);
+  }
+
+  .qr-icon-pill.red {
+    border-color: rgba(192,57,43,0.4);
+    color: rgba(210,80,70,0.9);
+  }
+
+  /* ═══ VERSO ═══ */
+  .back {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .back::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 280px; height: 280px;
+    border: 50px solid rgba(184,148,63,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .back-left {
+    background: var(--navy2);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-stripe {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    display: flex;
+  }
+  .bs-gold { flex: 3; background: var(--gold); }
+  .bs-red  { flex: 1; background: var(--red); }
+
+  .back-acj {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.08);
+    letter-spacing: 6px;
+    margin-top: 8px;
+  }
+
+  .back-creds { }
+
+  .back-cred-label {
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .back-cred-item {
+    margin-bottom: 7px;
+  }
+
+  .bci-label {
+    font-size: 7px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    margin-bottom: 1px;
+  }
+
+  .bci-val {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .back-right {
+    padding: 28px 26px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+  }
+
+  .back-serv-title {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .back-services { display: flex; flex-direction: column; gap: 7px; }
+
+  .back-svc {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .back-svc-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+
+  .back-svc-dot.red { background: var(--red); }
+
+  .back-svc-text {
+    font-size: 10px;
+    color: #2a2a4a;
+    line-height: 1.4;
+  }
+
+  .back-bottom {
+    border-top: 1px solid rgba(13,27,46,0.1);
+    padding-top: 12px;
+  }
+
+  .back-area {
+    font-size: 9px;
+    color: #888;
+    letter-spacing: 1px;
+  }
+
+  .back-area strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ═══ PRINT ═══ */
+  @media print {
+    body { background: white; padding: 20px; gap: 60px; }
+    .page-title, .page-sub, .print-hint, .card-label { display: none; }
+    .card { box-shadow: none; border: 1px solid #ddd; }
+    .card-wrap { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div class="page-title">Cartão de Visitas — Alcyone Cunha Junior</div>
+  <div class="page-sub">Frente e Verso · Tamanho: 9cm × 5cm</div>
+  <div class="print-hint">Para imprimir: Ctrl+P → Sem margens → Escala 100% → Salvar como PDF</div>
+</div>
+
+<!-- ═══ FRENTE ═══ -->
+<div class="card-wrap">
+  <div class="card-label">Frente</div>
+  <div class="card front">
+    <div class="front-stripe"><div class="fs-gold"></div><div class="fs-red"></div></div>
+
+    <div class="front-left">
+      <div class="front-top">
+        <div class="f-label">Portfólio Profissional · Engenharia &amp; Perícia</div>
+        <div class="f-name">Alcyone<br>Cunha Junior</div>
+        <div class="f-title1">Engenheiro Eletricista (Eletrônica)</div>
+        <div class="f-title2">Engenheiro de Segurança do Trabalho</div>
+        <div class="f-divider"></div>
+        <div class="f-contact">
+          <div class="f-contact-row">
+            <div class="f-dot"></div>
+            <div class="f-cval"><strong>+55 21 98801-0557</strong></div>
+          </div>
+          <div class="f-contact-row">
+            <div class="f-dot"></div>
+            <div class="f-cval"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="442528273d2b2a216a27312a2c256a2e312a2d2b36042c2b3029252d286a272b29">[email&#160;protected]</a></div>
+          </div>
+          <div class="f-contact-row">
+            <div class="f-dot"></div>
+            <div class="f-cval">Ponte Serrada – SC &nbsp;|&nbsp; Atend. nacional</div>
+          </div>
+        </div>
+      </div>
+      <div class="front-bottom">
+        <span class="f-crea">CREA-RJ 1985104856</span>
+        <span class="f-crea">CREA-SC 222656-5</span>
+        <span class="f-crea">RNP 2001887744</span>
+      </div>
+    </div>
+
+    <div class="front-right">
+      <div class="qr-label-top">Escaneie para acessar</div>
+      <div id="qrcode-front"></div>
+      <div class="qr-label-bottom">Vídeo · Currículo · Contato</div>
+      <div class="qr-icons">
+        <span class="qr-icon-pill red">▶ Vídeo</span>
+        <span class="qr-icon-pill">📄 CV</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VERSO ═══ -->
+<div class="card-wrap">
+  <div class="card-label">Verso</div>
+  <div class="card back">
+    <div class="back-left">
+      <div class="back-stripe"><div class="bs-gold"></div><div class="bs-red"></div></div>
+      <div style="margin-top:8px;margin-bottom:4px;">
+        <svg width="90" height="62" viewBox="0 0 120 78" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="46" width="104" height="1.2" fill="#b8943f"/>
+          <text x="14" y="42" fill="#b8943f" font-family="Georgia,serif" font-size="36" font-weight="700">A</text>
+          <text x="42" y="42" fill="rgba(255,255,255,0.38)" font-family="Georgia,serif" font-size="36" font-weight="700">C</text>
+          <text x="70" y="42" fill="rgba(255,255,255,0.22)" font-family="Georgia,serif" font-size="36" font-weight="700">J</text>
+          <text x="14" y="60" fill="#ffffff" font-family="Georgia,serif" font-size="36" font-weight="700">A</text>
+          <text x="42" y="60" fill="#b8943f" font-family="Georgia,serif" font-size="36" font-weight="700">C</text>
+          <text x="70" y="60" fill="rgba(255,255,255,0.30)" font-family="Georgia,serif" font-size="36" font-weight="700">J</text>
+        </svg>
+      </div>
+      <div class="back-creds">
+        <div class="back-cred-label">Registro Profissional</div>
+        <div class="back-cred-item">
+          <div class="bci-label">CREA-RJ</div>
+          <div class="bci-val">1985104856</div>
+        </div>
+        <div class="back-cred-item">
+          <div class="bci-label">CREA-SC</div>
+          <div class="bci-val">222656-5</div>
+        </div>
+        <div class="back-cred-item">
+          <div class="bci-label">RNP · CONFEA</div>
+          <div class="bci-val">2001887744</div>
+        </div>
+        <div class="back-cred-item">
+          <div class="bci-label">Habilitação</div>
+          <div class="bci-val">AT.01 a 18</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-right">
+      <div>
+        <div class="back-serv-title">Serviços &amp; Especialidades</div>
+        <div class="back-services">
+          <div class="back-svc">
+            <div class="back-svc-dot red"></div>
+            <div class="back-svc-text">Engenharia de Segurança do Trabalho</div>
+          </div>
+          <div class="back-svc">
+            <div class="back-svc-dot red"></div>
+            <div class="back-svc-text">Projetos de Inc. e Pânico (PSCIP) – CBMSC</div>
+          </div>
+          <div class="back-svc">
+            <div class="back-svc-dot red"></div>
+            <div class="back-svc-text">Laudos de Insalubridade e Periculosidade</div>
+          </div>
+          <div class="back-svc">
+            <div class="back-svc-dot red"></div>
+            <div class="back-svc-text">Análise de Riscos — GRO e PGR (NR-01)</div>
+          </div>
+          <div class="back-svc">
+            <div class="back-svc-dot"></div>
+            <div class="back-svc-text">Perito Judicial e Assistente Técnico</div>
+          </div>
+          <div class="back-svc">
+            <div class="back-svc-dot"></div>
+            <div class="back-svc-text">Engenharia Elétrica e Telecomunicações</div>
+          </div>
+          <div class="back-svc">
+            <div class="back-svc-dot"></div>
+            <div class="back-svc-text">Vistoria Predial e Laudos de Adequação</div>
+          </div>
+        </div>
+      </div>
+      <div class="back-bottom">
+        <div class="back-area"><strong>Oeste de Santa Catarina</strong> · Atendimento nacional a combinar</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const url = "https://alcyone-cunha-jr.github.io";
