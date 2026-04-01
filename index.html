@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alcyone Cunha Junior – Engenheiro</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2e;
+    --navy2: #162542;
+    --gold: #b8943f;
+    --gold2: #d4af6a;
+    --red: #c0392b;
+    --white: #ffffff;
+    --cream: #f8f4ed;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+  }
+
+  /* top gold line */
+  .topbar { position:fixed; top:0; left:0; width:100%; display:flex; height:5px; z-index:10; }
+  .topbar-gold { flex:3; background:var(--gold); }
+  .topbar-red  { flex:1; background:var(--red); }
+
+  .card {
+    background: var(--navy2);
+    border: 1px solid rgba(184,148,63,0.3);
+    border-radius: 16px;
+    max-width: 440px;
+    width: 100%;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    margin-top: 20px;
+  }
+
+  .card-header {
+    background: var(--navy);
+    padding: 36px 32px 28px;
+    text-align: center;
+    position: relative;
+  }
+
+  .card-header::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--red));
+    margin: 20px auto 0;
+  }
+
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    background: var(--navy2);
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+  }
+
+  .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .title1 {
+    font-size: 12px;
+    color: var(--gold2);
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+
+  .title2 {
+    font-size: 12px;
+    color: rgba(192,57,43,0.9);
+    letter-spacing: 1px;
+  }
+
+  .crea-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+
+  .crea-badge {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--navy);
+    background: var(--gold);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .card-body { padding: 28px 32px; }
+
+  .section-title {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  /* BUTTONS */
+  .btn-group { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .btn:hover { transform: translateX(4px); }
+
+  .btn-video {
+    background: var(--red);
+  }
+
+  .btn-cv {
+    background: rgba(184,148,63,0.15);
+    border-color: rgba(184,148,63,0.4);
+  }
+
+  .btn-wa {
+    background: rgba(37,211,102,0.12);
+    border-color: rgba(37,211,102,0.3);
+  }
+
+  .btn-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 20px;
+  }
+
+  .btn-video .btn-icon { background: rgba(255,255,255,0.15); }
+  .btn-cv .btn-icon    { background: rgba(184,148,63,0.2); }
+  .btn-wa .btn-icon    { background: rgba(37,211,102,0.2); }
+
+  .btn-text { flex: 1; }
+  .btn-label { font-size: 13px; font-weight: 600; color: var(--white); display: block; margin-bottom: 2px; }
+  .btn-sub   { font-size: 11px; color: rgba(255,255,255,0.5); }
+
+  .btn-arrow { font-size: 16px; color: rgba(255,255,255,0.3); }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .contact-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  .contact-label { font-size: 9px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+  .contact-value { font-size: 12px; color: var(--white); font-weight: 500; word-break: break-all; }
+
+  /* EXPERTISE */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 20px;
+    border: 1px solid rgba(184,148,63,0.35);
+    color: var(--gold2);
+  }
+  .tag.red { border-color: rgba(192,57,43,0.4); color: rgba(220,100,80,0.9); }
+
+  .card-footer {
+    padding: 18px 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+  }
+
+  .area {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-gold"></div>
+  <div class="topbar-red"></div>
+</div>
+
+<div class="card">
+
+  <div class="card-header">
+    <div class="avatar">ACJ</div>
+    <div class="name">Alcyone Cunha Junior</div>
+    <div class="title1">Engenheiro Eletricista (Eletrônica)</div>
+    <div class="title2">Engenheiro de Segurança do Trabalho</div>
+    <div class="crea-row">
+      <span class="crea-badge">CREA-RJ 1985104856</span>
+      <span class="crea-badge">CREA-SC 222656-5</span>
+    </div>
+  </div>
+
+  <div class="card-body">
+
+    <div class="section-title">Acesse</div>
+    <div class="btn-group">
+
+      <a href="VIDEO_URL_AQUI" class="btn btn-video">
+        <div class="btn-icon">▶</div>
+        <div class="btn-text">
+          <span class="btn-label">Vídeo de Apresentação</span>
+          <span class="btn-sub">1 min 30 seg · Conheça meu trabalho</span>
+        </div>
+        <div class="btn-arrow">›</div>
+      </a>
+
+      <a href="CURRICULO_URL_AQUI" class="btn btn-cv">
+        <div class="btn-icon">📄</div>
+        <div class="btn-text">
+          <span class="btn-label">Currículo Profissional</span>
+          <span class="btn-sub">PDF · Formação e experiência</span>
+        </div>
+        <div class="btn-arrow">›</div>
+      </a>
+
+      <a href="https://wa.me/5521988010557" class="btn btn-wa">
+        <div class="btn-icon">💬</div>
+        <div class="btn-text">
+          <span class="btn-label">WhatsApp</span>
+          <span class="btn-sub">+55 21 98801-0557 · Fale comigo</span>
+        </div>
+        <div class="btn-arrow">›</div>
+      </a>
+
+    </div>
+
+    <div class="section-title">Contato</div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-label">Celular</div>
+        <div class="contact-value">+55 21 98801-0557</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">E-mail</div>
+        <div class="contact-value">alcyone.cunha.junior@hotmail.com</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Localização</div>
+        <div class="contact-value">Ponte Serrada – SC</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-label">Cobertura</div>
+        <div class="contact-value">Oeste SC · Nacional a combinar</div>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-bottom:12px;">Especialidades</div>
+    <div class="tags">
+      <span class="tag red">Segurança do Trabalho</span>
+      <span class="tag red">Incêndio & Pânico</span>
+      <span class="tag red">PSCIP · CBMSC</span>
+      <span class="tag">Perito Judicial</span>
+      <span class="tag">Assistente Técnico</span>
+      <span class="tag">Engenharia Elétrica</span>
+      <span class="tag">Telecomunicações</span>
+    </div>
+
+  </div>
+
+  <div class="card-footer">
+    © 2025 Alcyone Cunha Junior · CREA-RJ 1985104856 · CREA-SC 222656-5 · RNP 2001887744
+  </div>
+
+</div>
+
+</body>
+</html>
