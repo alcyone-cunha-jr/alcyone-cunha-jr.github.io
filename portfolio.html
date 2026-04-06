@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfólio Profissional – Alcyone Cunha Junior</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2e;
+    --navy-mid: #162542;
+    --gold: #b8943f;
+    --gold-light: #d4af6a;
+    --red: #8b1a1a;
+    --red-mid: #a62020;
+    --red-light: #c0392b;
+    --cream: #f8f4ed;
+    --cream-dark: #efe8d8;
+    --white: #ffffff;
+    --text: #1a1a2e;
+    --text-light: #4a4a6a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Cormorant Garamond',Georgia,serif; background:var(--cream); color:var(--text); line-height:1.7; }
+
+  /* COVER */
+  .cover { background:var(--navy); min-height:100vh; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+  .cover::before { content:''; position:absolute; top:-100px; right:-100px; width:520px; height:520px; border:80px solid rgba(184,148,63,0.06); border-radius:50%; }
+  .cover::after { content:''; position:absolute; bottom:-80px; left:-80px; width:360px; height:360px; border:60px solid rgba(139,26,26,0.08); border-radius:50%; }
+  .cover-stripe { display:flex; height:7px; }
+  .cover-stripe-gold { flex:3; background:var(--gold); }
+  .cover-stripe-red  { flex:1; background:var(--red-light); }
+  .cover-inner { flex:1; display:flex; flex-direction:column; justify-content:center; padding:60px 80px; position:relative; z-index:1; }
+  .cover-label { font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:38px; }
+  .cover-name { font-family:'Playfair Display',serif; font-size:56px; font-weight:700; color:var(--white); line-height:1.08; margin-bottom:14px; }
+  .cover-titles { display:flex; flex-direction:column; gap:6px; margin-bottom:44px; }
+  .cover-title-main { font-family:'Cormorant Garamond',serif; font-size:21px; font-weight:400; color:var(--gold-light); letter-spacing:2px; }
+  .cover-title-sec  { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:500; color:rgba(220,90,80,0.9); letter-spacing:2px; }
+  .cover-divider { width:80px; height:2px; background:linear-gradient(90deg,var(--gold) 60%,var(--red-light) 100%); margin-bottom:44px; }
+  .cover-tags { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:52px; }
+  .cover-tag { font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--navy); background:var(--gold); padding:7px 16px; border-radius:2px; }
+  .cover-tag.red { background:var(--red-light); color:var(--white); }
+  .cover-crea { font-family:'Montserrat',sans-serif; font-size:11px; color:rgba(255,255,255,0.35); letter-spacing:2px; line-height:2.2; }
+  .cover-footer { padding:28px 80px; border-top:1px solid rgba(184,148,63,0.18); display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; }
+  .cover-contact { font-family:'Montserrat',sans-serif; font-size:11px; color:rgba(255,255,255,0.42); letter-spacing:1px; line-height:2; }
+  .cover-logo-text { font-family:'Playfair Display',serif; font-size:28px; font-weight:600; color:rgba(255,255,255,0.07); letter-spacing:8px; }
+
+  /* PAGE */
+  .page { max-width:900px; margin:0 auto; }
+  .section { padding:65px 80px; border-bottom:1px solid rgba(13,27,46,0.08); }
+  .section-label { font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+  .section-label.red { color:var(--red-light); }
+  .section-title { font-family:'Playfair Display',serif; font-size:33px; font-weight:700; color:var(--navy); margin-bottom:38px; line-height:1.2; }
+
+  /* PROFILE */
+  .profile-section { background:var(--navy); padding:65px 80px; }
+  .profile-section .section-label { color:var(--gold); }
+  .profile-section .section-title { color:var(--white); margin-bottom:22px; }
+  .profile-text { font-size:19px; font-weight:300; color:rgba(255,255,255,0.74); line-height:1.95; max-width:700px; }
+  .ph { color:var(--gold-light); font-weight:500; }
+  .pr { color:rgba(220,90,80,0.9); font-weight:500; }
+
+  /* SAFETY HERO */
+  .safety-hero { background:var(--red); display:grid; grid-template-columns:1fr 320px; position:relative; overflow:hidden; }
+  .safety-hero::before { content:''; position:absolute; top:-60px; right:280px; width:280px; height:280px; border:50px solid rgba(255,255,255,0.04); border-radius:50%; }
+  .safety-hero-content { padding:60px 50px 60px 80px; position:relative; z-index:1; }
+  .safety-hero-label { font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:14px; }
+  .safety-hero-title { font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:var(--white); line-height:1.15; margin-bottom:22px; }
+  .safety-hero-text { font-size:17px; font-weight:300; color:rgba(255,255,255,0.76); line-height:1.9; margin-bottom:34px; max-width:500px; }
+  .safety-pillars { display:flex; flex-direction:column; gap:11px; }
+  .safety-pillar { display:flex; align-items:flex-start; gap:13px; font-size:15px; color:rgba(255,255,255,0.83); }
+  .safety-pillar-dot { width:6px; height:6px; background:rgba(255,255,255,0.5); border-radius:50%; flex-shrink:0; margin-top:8px; }
+  .safety-hero-sidebar { background:rgba(0,0,0,0.28); display:flex; flex-direction:column; justify-content:center; align-items:center; padding:50px 28px; text-align:center; gap:0; }
+  .safety-stat { width:100%; padding:24px 0; border-top:1px solid rgba(255,255,255,0.1); text-align:center; }
+  .safety-stat:first-child { border-top:none; padding-top:0; }
+  .safety-stat-number { font-family:'Playfair Display',serif; font-size:44px; font-weight:700; color:var(--white); line-height:1; margin-bottom:6px; }
+  .safety-stat-label { font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.42); }
+
+  /* FIRE SECTION */
+  .fire-section { background:var(--cream-dark); padding:65px 80px; border-bottom:1px solid rgba(13,27,46,0.08); }
+  .fire-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .fire-card { background:var(--white); border-top:4px solid var(--red-light); padding:32px 26px; }
+  .fire-card-icon { font-size:26px; margin-bottom:12px; display:block; }
+  .fire-card-title { font-family:'Playfair Display',serif; font-size:19px; font-weight:700; color:var(--navy); margin-bottom:10px; }
+  .fire-card-desc { font-size:15px; color:var(--text-light); line-height:1.85; }
+  .fire-norms { margin-top:14px; display:flex; flex-wrap:wrap; gap:6px; }
+  .norm-badge { font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; letter-spacing:1px; color:var(--red-light); border:1px solid var(--red-light); padding:3px 8px; border-radius:2px; }
+
+  /* SERVICES */
+  .services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .service-card { background:var(--white); border:1px solid rgba(13,27,46,0.09); border-top:3px solid var(--gold); padding:28px 22px; }
+  .service-card.red-top { border-top-color:var(--red-light); }
+  .service-icon { font-size:24px; margin-bottom:12px; display:block; }
+  .service-name { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--navy); margin-bottom:9px; }
+  .service-desc { font-size:14px; color:var(--text-light); line-height:1.8; }
+
+  /* EXPERTISE */
+  .expertise-list { display:grid; grid-template-columns:1fr 1fr; }
+  .expertise-item { display:flex; align-items:flex-start; gap:13px; padding:18px 0; border-bottom:1px solid rgba(13,27,46,0.07); }
+  .expertise-item:nth-child(odd) { padding-right:34px; border-right:1px solid rgba(13,27,46,0.07); }
+  .expertise-item:nth-child(even) { padding-left:34px; }
+  .expertise-dot { width:7px; height:7px; background:var(--gold); border-radius:50%; margin-top:8px; flex-shrink:0; }
+  .expertise-dot.red { background:var(--red-light); }
+  .expertise-text { font-size:16px; color:var(--text); line-height:1.6; }
+
+  /* TIMELINE */
+  .timeline-item { display:grid; grid-template-columns:190px 1fr; gap:34px; padding-bottom:46px; position:relative; }
+  .timeline-item:not(:last-child)::after { content:''; position:absolute; left:208px; top:12px; bottom:0; width:1px; background:rgba(184,148,63,0.25); }
+  .timeline-date { text-align:right; padding-top:2px; }
+  .timeline-years { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--gold); display:block; line-height:1; }
+  .timeline-period { font-family:'Montserrat',sans-serif; font-size:10px; color:var(--text-light); letter-spacing:1px; display:block; margin-top:4px; }
+  .timeline-body { padding-left:34px; border-left:3px solid var(--gold); }
+  .timeline-company { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:var(--navy); margin-bottom:3px; }
+  .timeline-role { font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+  .timeline-desc { font-size:15px; color:var(--text-light); line-height:1.85; }
+
+  /* EDUCATION */
+  .edu-item { display:grid; grid-template-columns:110px 1fr; gap:26px; align-items:start; padding:26px 0; border-bottom:1px solid rgba(13,27,46,0.07); }
+  .edu-year { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:var(--gold); padding-top:2px; }
+  .edu-degree { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--navy); margin-bottom:3px; }
+  .edu-school { font-size:14px; color:var(--text-light); font-style:italic; }
+  .edu-attr { font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:1px; color:var(--gold); margin-top:5px; }
+
+  /* CREDENTIALS */
+  .credentials-section { background:var(--navy-mid); padding:65px 80px; }
+  .credentials-section .section-label { color:var(--gold); }
+  .credentials-section .section-title { color:var(--white); }
+  .cred-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .cred-card { border:1px solid rgba(184,148,63,0.2); padding:24px 20px; background:rgba(255,255,255,0.03); }
+  .cred-label { font-family:'Montserrat',sans-serif; font-size:9px; font-weight:600; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:7px; }
+  .cred-value { font-family:'Playfair Display',serif; font-size:18px; font-weight:700; color:var(--white); line-height:1.3; margin-bottom:3px; }
+  .cred-sub { font-size:12px; color:rgba(255,255,255,0.36); }
+
+  /* SPEC */
+  .spec-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .spec-item { background:var(--white); border-left:3px solid var(--gold); padding:18px 20px; }
+  .spec-item.red-border { border-left-color:var(--red-light); }
+  .spec-title { font-family:'Playfair Display',serif; font-size:16px; font-weight:700; color:var(--navy); margin-bottom:3px; }
+  .spec-inst { font-size:13px; color:var(--text-light); }
+  .spec-hours { font-family:'Montserrat',sans-serif; font-size:9px; color:var(--gold); letter-spacing:1px; margin-top:4px; }
+  .spec-hours.red { color:var(--red-light); }
+
+  /* CTA */
+  .cta-section { background:var(--navy); padding:65px 80px; text-align:center; }
+  .cta-label { font-family:'Montserrat',sans-serif; font-size:10px; font-weight:600; letter-spacing:5px; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+  .cta-title { font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:var(--white); margin-bottom:16px; line-height:1.2; }
+  .cta-text { font-size:17px; color:rgba(255,255,255,0.56); max-width:560px; margin:0 auto 44px; line-height:1.85; }
+  .cta-contacts { display:flex; justify-content:center; gap:50px; flex-wrap:wrap; }
+  .cta-contact-item { text-align:center; }
+  .cta-contact-label { font-family:'Montserrat',sans-serif; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+  .cta-contact-value { font-family:'Playfair Display',serif; font-size:17px; color:var(--white); }
+
+  /* FOOTER */
+  .footer { background:#080f1a; padding:20px 80px; display:flex; justify-content:space-between; align-items:center; }
+  .footer-text { font-family:'Montserrat',sans-serif; font-size:10px; color:rgba(255,255,255,0.2); letter-spacing:1px; }
+  .footer-gold { color:var(--gold); font-size:15px; font-weight:700; font-family:'Playfair Display',serif; }
+
+  @media print { .cover { min-height:auto; } .section { page-break-inside:avoid; } }
+  @media (max-width:700px) {
+    .cover-inner,.section,.profile-section,.fire-section,.credentials-section,.cta-section { padding:40px 22px; }
+    .cover-name { font-size:36px; }
+    .safety-hero { grid-template-columns:1fr; }
+    .safety-hero-sidebar { flex-direction:row; flex-wrap:wrap; justify-content:center; }
+    .services-grid,.fire-grid,.cred-grid,.spec-grid { grid-template-columns:1fr; }
+    .expertise-list { grid-template-columns:1fr; }
+    .expertise-item:nth-child(odd) { border-right:none; padding-right:0; }
+    .expertise-item:nth-child(even) { padding-left:0; }
+    .timeline-item { grid-template-columns:1fr; }
+    .timeline-item::after { display:none; }
+    .timeline-date { text-align:left; }
+    .cover-footer,.footer { flex-direction:column; gap:14px; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ COVER ══ -->
+<div class="cover">
+  <div class="cover-stripe"><div class="cover-stripe-gold"></div><div class="cover-stripe-red"></div></div>
+  <div class="cover-inner">
+    <div class="cover-label">Portfólio Profissional · Engenharia &amp; Perícia Técnica</div>
+    <div class="cover-name">Alcyone<br>Cunha Junior</div>
+    <div class="cover-titles">
+      <div class="cover-title-main">Engenheiro Eletricista – Eletrônica</div>
+      <div class="cover-title-sec">Engenheiro de Segurança do Trabalho</div>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-tags">
+      <span class="cover-tag red">Segurança do Trabalho</span>
+      <span class="cover-tag red">Incêndio &amp; Pânico</span>
+      <span class="cover-tag">Perito Judicial</span>
+      <span class="cover-tag">Assistente Técnico</span>
+      <span class="cover-tag">Consultor Técnico</span>
+      <span class="cover-tag">Engenharia Elétrica</span>
+      <span class="cover-tag">Telecomunicações</span>
+    </div>
+    <div class="cover-crea">
+      CREA-RJ Nº 1985104856 &nbsp;|&nbsp; CREA-SC Nº 222656-5 &nbsp;|&nbsp; RNP 2001887744<br>
+      Registro desde 06/12/1985 &nbsp;|&nbsp; Mais de 40 anos de experiência profissional
+    </div>
+  </div>
+  <div class="cover-footer">
+    <div class="cover-contact">
+      <span>Celular / WhatsApp</span><br>
+      <span style="color:white">+55 21 98801-0557</span><br>
+      <span>E-mail</span><br>
+      <span style="color:white">alcyone.cunha.junior@hotmail.com</span>
+    </div>
+    <div class="cover-logo-text">ACJ</div>
+  </div>
+</div>
+
+<!-- ══ BODY ══ -->
+<div class="page">
+
+  <!-- PERFIL -->
+  <div class="profile-section">
+    <div class="section-label">Apresentação Profissional</div>
+    <div class="section-title">Quem sou eu</div>
+    <p class="profile-text">
+      Sou <span class="ph">Engenheiro Eletricista (Eletrônica)</span> e <span class="pr">Engenheiro de Segurança do Trabalho</span>, com mais de quatro décadas de experiência profissional. Minha atuação combina sólida base técnica em engenharia elétrica e telecomunicações com especialização aprofundada em <span class="pr">segurança do trabalho, prevenção e combate a incêndio e pânico</span> e análise de riscos ocupacionais.<br><br>
+      Elaboro <span class="ph">laudos, pareceres técnicos e projetos</span> com rigor metodológico, fundamentação nas normas vigentes — NBRs, NRs e legislação aplicável — e linguagem objetiva, seja para o ambiente judicial, empresarial ou regulatório. Atuo como <span class="ph">Perito Judicial, Assistente Técnico, Projetista e Consultor</span> nas áreas de segurança do trabalho, incêndio e pânico, engenharia elétrica e telecomunicações.
+    </p>
+  </div>
+
+  <!-- SAFETY HERO -->
+  <div class="safety-hero">
+    <div class="safety-hero-content">
+      <div class="safety-hero-label">Especialidade Principal</div>
+      <div class="safety-hero-title">Engenharia de<br>Segurança do Trabalho</div>
+      <p class="safety-hero-text">
+        Com habilitação plena pelo CONFEA (RES 359/91 – ART 4, AT.01 a 18), ofereço serviços completos em segurança do trabalho — desde análise de riscos e conformidade com Normas Regulamentadoras até elaboração de laudos técnicos, projetos de segurança contra incêndio e pânico, e suporte especializado em demandas judiciais trabalhistas e previdenciárias.
+      </p>
+      <div class="safety-pillars">
+        <div class="safety-pillar"><div class="safety-pillar-dot"></div><span>Laudos técnicos em acidentes de trabalho e sinistros</span></div>
+        <div class="safety-pillar"><div class="safety-pillar-dot"></div><span>Análise e gestão de riscos ocupacionais (GRO / PGR – NR-01)</span></div>
+        <div class="safety-pillar"><div class="safety-pillar-dot"></div><span>Projetos de Segurança contra Incêndio e Pânico (PSCIP)</span></div>
+        <div class="safety-pillar"><div class="safety-pillar-dot"></div><span>Conformidade com Normas Regulamentadoras (NR-15, NR-16, NR-17…)</span></div>
+        <div class="safety-pillar"><div class="safety-pillar-dot"></div><span>Vistoria predial e avaliação de condições de segurança</span></div>
+        <div class="safety-pillar"><div class="safety-pillar-dot"></div><span>Suporte pericial em ações trabalhistas e previdenciárias</span></div>
+      </div>
+    </div>
+    <div class="safety-hero-sidebar">
+      <div class="safety-stat">
+        <div class="safety-stat-number">40+</div>
+        <div class="safety-stat-label">Anos de<br>experiência</div>
+      </div>
+      <div class="safety-stat">
+        <div class="safety-stat-number">AT18</div>
+        <div class="safety-stat-label">Atribuições<br>plenas CONFEA</div>
+      </div>
+      <div class="safety-stat">
+        <div class="safety-stat-number">2</div>
+        <div class="safety-stat-label">Registros<br>CREA ativos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INCÊNDIO & PÂNICO -->
+  <div class="fire-section">
+    <div class="section-label red">Especialidade · Prevenção de Sinistros</div>
+    <div class="section-title">Projetos de Segurança contra<br>Incêndio e Pânico</div>
+    <div class="fire-grid">
+
+      <div class="fire-card">
+        <span class="fire-card-icon">🔥</span>
+        <div class="fire-card-title">Elaboração de PSCIP</div>
+        <p class="fire-card-desc">Desenvolvimento completo de Projetos de Segurança Contra Incêndio e Pânico — memorial descritivo, dimensionamento de sistemas de combate a incêndio, rotas de fuga, sinalização e extintores, conforme normas do Corpo de Bombeiros e ABNT.</p>
+        <div class="fire-norms">
+          <span class="norm-badge">NBR 9077</span>
+          <span class="norm-badge">NBR 13714</span>
+          <span class="norm-badge">NBR 12693</span>
+          <span class="norm-badge">IT CBMSC</span>
+        </div>
+      </div>
+
+      <div class="fire-card">
+        <span class="fire-card-icon">🚨</span>
+        <div class="fire-card-title">Sistemas de Detecção e Alarme</div>
+        <p class="fire-card-desc">Projeto e especificação de sistemas de detecção automática de incêndio, alarme e comunicação de emergência — análise de risco, dimensionamento de detectores, acionadores manuais e centrais de alarme conforme normas ABNT e IEC.</p>
+        <div class="fire-norms">
+          <span class="norm-badge">NBR 17240</span>
+          <span class="norm-badge">NBR 9441</span>
+          <span class="norm-badge">IEC 31010</span>
+        </div>
+      </div>
+
+      <div class="fire-card">
+        <span class="fire-card-icon">📝</span>
+        <div class="fire-card-title">Laudos e Vistoria de Incêndio</div>
+        <p class="fire-card-desc">Inspeção técnica e vistoria de instalações quanto à conformidade com exigências do Corpo de Bombeiros. Elaboração de laudos de adequação e relatórios de não-conformidade com recomendações de regularização para empresas e condomínios.</p>
+        <div class="fire-norms">
+          <span class="norm-badge">Decreto Estadual</span>
+          <span class="norm-badge">NBR 14276</span>
+          <span class="norm-badge">SOBES</span>
+        </div>
+      </div>
+
+      <div class="fire-card">
+        <span class="fire-card-icon">⚖️</span>
+        <div class="fire-card-title">Perícia em Sinistros de Incêndio</div>
+        <p class="fire-card-desc">Investigação técnica de causas e origens de incêndios para fins judiciais e securitários. Laudos periciais com análise das condições elétricas e estruturais, determinação da causa provável e avaliação de responsabilidades técnicas.</p>
+        <div class="fire-norms">
+          <span class="norm-badge">CPC Art. 156</span>
+          <span class="norm-badge">ABNT NBR</span>
+          <span class="norm-badge">Seguros</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SERVIÇOS -->
+  <div class="section">
+    <div class="section-label">O que ofereço</div>
+    <div class="section-title">Todos os Serviços</div>
+    <div class="services-grid">
+
+      <div class="service-card red-top">
+        <span class="service-icon">🛡️</span>
+        <div class="service-name">Segurança do Trabalho</div>
+        <p class="service-desc">Laudos técnicos, análise de riscos, GRO/PGR, conformidade com NRs, insalubridade, periculosidade e suporte em ações trabalhistas e previdenciárias.</p>
+      </div>
+
+      <div class="service-card red-top">
+        <span class="service-icon">🔥</span>
+        <div class="service-name">Incêndio &amp; Pânico</div>
+        <p class="service-desc">Projetos PSCIP, vistorias de conformidade, laudos de adequação, aprovação junto ao Corpo de Bombeiros e perícia em sinistros para fins judiciais e securitários.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">⚖️</span>
+        <div class="service-name">Perícia Judicial</div>
+        <p class="service-desc">Elaboração de laudos periciais em demandas judiciais envolvendo engenharia elétrica, eletrônica, telecomunicações e segurança do trabalho.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">📋</span>
+        <div class="service-name">Assistência Técnica</div>
+        <p class="service-desc">Análise crítica de laudos adversos, elaboração de quesitos, manifestações técnicas e suporte especializado em processos judiciais.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">📡</span>
+        <div class="service-name">Telecomunicações</div>
+        <p class="service-desc">Implantação, manutenção e diagnóstico de redes. Avaliação de sistemas, análise de contratos e gestão de projetos de infraestrutura.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">⚡</span>
+        <div class="service-name">Engenharia Elétrica</div>
+        <p class="service-desc">Análise de sistemas elétricos e eletrônicos, inspeções técnicas, vistoria de instalações e laudos de conformidade normativa.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EXPERTISE -->
+  <div class="section" style="background:var(--cream-dark);">
+    <div class="section-label">Competências</div>
+    <div class="section-title">Áreas de Atuação</div>
+    <div class="expertise-list">
+      <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Projetos de Segurança contra Incêndio e Pânico (PSCIP)</div></div>
+      <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Laudos de insalubridade e periculosidade (NR-15 / NR-16)</div></div>
+      <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Análise e gestão de riscos ocupacionais (GRO / PGR)</div></div>
+      <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Vistoria predial e laudos de conformidade de segurança</div></div>
+      <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Perícia em acidentes de trabalho e sinistros de incêndio</div></div>
+      <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Sistemas de detecção, alarme e combate a incêndio</div></div>
+      <div class="expertise-item"><div class="expertise-dot"></div><div class="expertise-text">Perícia judicial em engenharia elétrica e eletrônica</div></div>
+      <div class="expertise-item"><div class="expertise-dot"></div><div class="expertise-text">Implantação e manutenção de redes de telecomunicações</div></div>
+      <div class="expertise-item"><div class="expertise-dot"></div><div class="expertise-text">Diagnósticos técnicos e análise de sistemas elétricos</div></div>
+      <div class="expertise-item"><div class="expertise-dot"></div><div class="expertise-text">Gestão de projetos e contratos de grande porte (PMO)</div></div>
+    </div>
+  </div>
+
+  <!-- TRAJETÓRIA -->
+  <div class="section">
+    <div class="section-label">Experiência</div>
+    <div class="section-title">Trajetória Profissional</div>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">
+          <span class="timeline-years">12+</span>
+          <span class="timeline-period">anos</span>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-company">Logictel</div>
+          <div class="timeline-role">Gerente Sênior de Implantação</div>
+          <p class="timeline-desc">Liderança de projetos de implantação de redes e infraestrutura de telecomunicações. Gestão de contratos estratégicos, monitoramento de KPIs financeiros, encerramento de projetos com visão de PMO e mentoria de equipes técnicas.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">
+          <span class="timeline-years">35</span>
+          <span class="timeline-period">anos · 1978–2013</span>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-company">CETEL / TELERJ / TELEMAR / OI</div>
+          <div class="timeline-role">Gerente · Engenheiro Sênior</div>
+          <p class="timeline-desc">Três décadas e meia na Companhia Telefônica do Estado do Rio de Janeiro. Planejamento, projeto, implantação e manutenção de redes. Negociação de grandes contratos, liderança multidisciplinar e controle financeiro de projetos.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">
+          <span class="timeline-years">Atual</span>
+          <span class="timeline-period">Pericial &amp; Consultoria</span>
+        </div>
+        <div class="timeline-body">
+          <div class="timeline-company">Atuação Pericial Independente</div>
+          <div class="timeline-role">Perito · Assistente Técnico · Projetista · Consultor</div>
+          <p class="timeline-desc">Elaboração de laudos, pareceres e projetos técnicos com rigor normativo. Projetos de incêndio e pânico, análise de riscos ocupacionais, vistorias de segurança e suporte qualificado em demandas judiciais e administrativas.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CREDENCIAIS -->
+  <div class="credentials-section">
+    <div class="section-label">Registro Profissional</div>
+    <div class="section-title">Credenciais &amp; Habilitações</div>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <div class="cred-label">Registro CREA-RJ</div>
+        <div class="cred-value">1985104856</div>
+        <div class="cred-sub">Desde 06/12/1985</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Registro CREA-SC</div>
+        <div class="cred-value">222656-5</div>
+        <div class="cred-sub">Atuação nacional</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">RNP – CONFEA</div>
+        <div class="cred-value">2001887744</div>
+        <div class="cred-sub">Registro Nacional</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Eng. Segurança do Trabalho</div>
+        <div class="cred-value">RES 359/91</div>
+        <div class="cred-sub">ART 4 · AT.01 a 18 · CONFEA</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Eng. Eletricista – Eletrônica</div>
+        <div class="cred-value">RES 218/73</div>
+        <div class="cred-sub">ART 09 · AT.01 a 18 · CONFEA</div>
+      </div>
+      <div class="cred-card">
+        <div class="cred-label">Habilitação</div>
+        <div class="cred-value">AT.01 a 18</div>
+        <div class="cred-sub">Atribuições plenas · Ambos os títulos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAÇÃO -->
+  <div class="section">
+    <div class="section-label">Formação Acadêmica</div>
+    <div class="section-title">Educação &amp; Titulação</div>
+    <div class="edu-item">
+      <div class="edu-year">2001</div>
+      <div>
+        <div class="edu-degree">Engenheiro de Segurança do Trabalho</div>
+        <div class="edu-school">Fundação Técnico Educacional Souza Marques – RJ</div>
+        <div class="edu-attr">RES 359/91 · ART 4 · AT.01 a 18</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">1989</div>
+      <div>
+        <div class="edu-degree">Engenheiro Eletricista – Eletrônica</div>
+        <div class="edu-school">Faculdade de Engenharia General Roberto Lisboa – RJ</div>
+        <div class="edu-attr">RES 218/73 · ART 09 · AT.01 a 18</div>
+      </div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-year">1985</div>
+      <div>
+        <div class="edu-degree">Tecnólogo em Técnicas Digitais</div>
+        <div class="edu-school">Faculdades Integradas Estácio de Sá – RJ</div>
+        <div class="edu-attr">RES 313/86 · ART 3</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESPECIALIZAÇÕES -->
+  <div class="section" style="background:var(--cream-dark);">
+    <div class="section-label">Cursos &amp; Especializações</div>
+    <div class="section-title">Formação Complementar</div>
+    <div class="spec-grid">
+      <div class="spec-item red-border">
+        <div class="spec-title">Elaboração de Projetos de Segurança contra Incêndio e Pânico</div>
+        <div class="spec-inst">Sociedade Brasileira de Engenharia de Segurança – SOBES/RJ</div>
+        <div class="spec-hours red">Certificado · Especialização prática</div>
+      </div>
+      <div class="spec-item red-border">
+        <div class="spec-title">Engenharia de Avaliações e Perícias Judiciais</div>
+        <div class="spec-inst">Universidade Federal Fluminense – UFF</div>
+        <div class="spec-hours red">60 horas</div>
+      </div>
+      <div class="spec-item red-border">
+        <div class="spec-title">Perícia Judicial e Processo Judicial Eletrônico – TJRJ</div>
+        <div class="spec-inst">Sociedade Brasileira de Engenharia de Segurança – SOBES/RJ</div>
+        <div class="spec-hours red">30 horas</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-title">Laudo Técnico de Vistoria Predial</div>
+        <div class="spec-inst">Sindicato dos Engenheiros do Estado do RJ – SENGE/RJ</div>
+        <div class="spec-hours">20 horas</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-title">Padrão Gerencial de Processo</div>
+        <div class="spec-inst">MBS Treinamento e Consultoria – RJ</div>
+        <div class="spec-hours">16 horas</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-title">Professor de Matemática Aplicada</div>
+        <div class="spec-inst">Sociedade de Ensino Superior Estácio de Sá – RJ</div>
+        <div class="spec-hours">Docência universitária</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-label">Contato Profissional</div>
+    <div class="cta-title">Vamos trabalhar juntos?</div>
+    <p class="cta-text">Disponível para atuação como Perito Judicial, Assistente Técnico, Projetista e Consultor em Segurança do Trabalho, Incêndio e Pânico, Engenharia Elétrica e Telecomunicações — em todo o território nacional.</p>
+    <div class="cta-contacts">
+      <div class="cta-contact-item">
+        <div class="cta-contact-label">Celular / WhatsApp</div>
+        <div class="cta-contact-value">+55 21 98801-0557</div>
+      </div>
+      <div class="cta-contact-item">
+        <div class="cta-contact-label">E-mail</div>
+        <div class="cta-contact-value">alcyone.cunha.junior@hotmail.com</div>
+      </div>
+      <div class="cta-contact-item">
+        <div class="cta-contact-label">Localização</div>
+        <div class="cta-contact-value">Ponte Serrada – SC</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">© 2025 Alcyone Cunha Junior · CREA-RJ 1985104856 · CREA-SC 222656-5 · Eng. Segurança do Trabalho · Eng. Eletricista</div>
+    <div class="footer-gold">ACJ</div>
+  </div>
+
+</div>
+</body>
+</html>
