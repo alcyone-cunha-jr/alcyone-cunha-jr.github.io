@@ -174,6 +174,37 @@
 </head>
 <body>
 
+<!-- ══ NAVBAR ══ -->
+<nav style="
+  position: sticky; top: 0; z-index: 999;
+  background: #080f1a;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 40px;
+  border-bottom: 2px solid #b8943f;
+">
+  <a href="index.html" style="
+    font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: #b8943f; text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    transition: opacity .2s;
+  " onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+    ← Apresentação
+  </a>
+  <span style="
+    font-family: 'Playfair Display', serif; font-size: 15px;
+    color: rgba(255,255,255,0.35); letter-spacing: 4px;
+  ">ACJ</span>
+  <a href="curriculo.html" style="
+    font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); text-decoration: none;
+    transition: opacity .2s;
+  " onmouseover="this.style.opacity='.6'" onmouseout="this.style.opacity='1'">
+    Currículo →
+  </a>
+</nav>
+
 <!-- ══ COVER ══ -->
 <div class="cover">
   <div class="cover-stripe"><div class="cover-stripe-gold"></div><div class="cover-stripe-red"></div></div>
@@ -195,7 +226,7 @@
       <span class="cover-tag">Telecomunicações</span>
     </div>
     <div class="cover-crea">
-      CREA-RJ Nº 1985104856 &nbsp;|&nbsp; CREA-SC Nº 222656-5 &nbsp;|&nbsp; RNP 2001887744<br>
+      CREA-RJ Nº 1985104856 &nbsp;|&nbsp; Visto Profissional CREA-SC Nº 222656-5 &nbsp;|&nbsp; RNP 2001887744<br>
       Registro desde 06/12/1985 &nbsp;|&nbsp; Mais de 40 anos de experiência profissional
     </div>
   </div>
@@ -219,7 +250,7 @@
     <div class="section-title">Quem sou eu</div>
     <p class="profile-text">
       Sou <span class="ph">Engenheiro Eletricista (Eletrônica)</span> e <span class="pr">Engenheiro de Segurança do Trabalho</span>, com mais de quatro décadas de experiência profissional. Minha atuação combina sólida base técnica em engenharia elétrica e telecomunicações com especialização aprofundada em <span class="pr">segurança do trabalho, prevenção e combate a incêndio e pânico</span> e análise de riscos ocupacionais.<br><br>
-      Elaboro <span class="ph">laudos, pareceres técnicos e projetos</span> com rigor metodológico, fundamentação nas normas vigentes — NBRs, NRs e legislação aplicável — e linguagem objetiva, seja para o ambiente judicial, empresarial ou regulatório. Atuo como <span class="ph">Perito Judicial, Assistente Técnico, Projetista e Consultor</span> nas áreas de segurança do trabalho, incêndio e pânico, engenharia elétrica e telecomunicações.
+      Elaboro <span class="ph">laudos, pareceres técnicos e projetos</span> com rigor metodológico, fundamentação nas normas vigentes — NBRs, NRs e legislação aplicável — e linguagem objetiva, seja para o ambiente judicial, empresarial ou regulatório. Estou habilitado e disponível para atuar como <span class="ph">Perito Judicial, Assistente Técnico, Projetista e Consultor</span> nas áreas de segurança do trabalho, incêndio e pânico, engenharia elétrica e telecomunicações.
     </p>
   </div>
 
@@ -250,8 +281,8 @@
         <div class="safety-stat-label">Atribuições<br>plenas CONFEA</div>
       </div>
       <div class="safety-stat">
-        <div class="safety-stat-number">2</div>
-        <div class="safety-stat-label">Registros<br>CREA ativos</div>
+        <div class="safety-stat-number">RJ+SC</div>
+        <div class="safety-stat-label">CREA-RJ registro<br>+ Visto Prof. SC</div>
       </div>
     </div>
   </div>
@@ -281,7 +312,7 @@
         <div class="fire-norms">
           <span class="norm-badge">NBR 17240</span>
           <span class="norm-badge">NBR 9441</span>
-          <span class="norm-badge">IEC 31010</span>
+          <span class="norm-badge">IT CBMSC</span>
         </div>
       </div>
 
@@ -293,17 +324,6 @@
           <span class="norm-badge">Decreto Estadual</span>
           <span class="norm-badge">NBR 14276</span>
           <span class="norm-badge">SOBES</span>
-        </div>
-      </div>
-
-      <div class="fire-card">
-        <span class="fire-card-icon">⚖️</span>
-        <div class="fire-card-title">Perícia em Sinistros de Incêndio</div>
-        <p class="fire-card-desc">Investigação técnica de causas e origens de incêndios para fins judiciais e securitários. Laudos periciais com análise das condições elétricas e estruturais, determinação da causa provável e avaliação de responsabilidades técnicas.</p>
-        <div class="fire-norms">
-          <span class="norm-badge">CPC Art. 156</span>
-          <span class="norm-badge">ABNT NBR</span>
-          <span class="norm-badge">Seguros</span>
         </div>
       </div>
 
@@ -320,12 +340,6 @@
         <span class="service-icon">🛡️</span>
         <div class="service-name">Segurança do Trabalho</div>
         <p class="service-desc">Laudos técnicos, análise de riscos, GRO/PGR, conformidade com NRs, insalubridade, periculosidade e suporte em ações trabalhistas e previdenciárias.</p>
-      </div>
-
-      <div class="service-card red-top">
-        <span class="service-icon">🔥</span>
-        <div class="service-name">Incêndio &amp; Pânico</div>
-        <p class="service-desc">Projetos PSCIP, vistorias de conformidade, laudos de adequação, aprovação junto ao Corpo de Bombeiros e perícia em sinistros para fins judiciais e securitários.</p>
       </div>
 
       <div class="service-card">
@@ -364,7 +378,7 @@
       <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Laudos de insalubridade e periculosidade (NR-15 / NR-16)</div></div>
       <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Análise e gestão de riscos ocupacionais (GRO / PGR)</div></div>
       <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Vistoria predial e laudos de conformidade de segurança</div></div>
-      <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Perícia em acidentes de trabalho e sinistros de incêndio</div></div>
+      <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Perícia em acidentes de trabalho</div></div>
       <div class="expertise-item"><div class="expertise-dot red"></div><div class="expertise-text">Sistemas de detecção, alarme e combate a incêndio</div></div>
       <div class="expertise-item"><div class="expertise-dot"></div><div class="expertise-text">Perícia judicial em engenharia elétrica e eletrônica</div></div>
       <div class="expertise-item"><div class="expertise-dot"></div><div class="expertise-text">Implantação e manutenção de redes de telecomunicações</div></div>
@@ -381,8 +395,8 @@
 
       <div class="timeline-item">
         <div class="timeline-date">
-          <span class="timeline-years">12+</span>
-          <span class="timeline-period">anos</span>
+          <span class="timeline-years">12</span>
+          <span class="timeline-period">anos · 2013–2025</span>
         </div>
         <div class="timeline-body">
           <div class="timeline-company">Logictel</div>
@@ -397,7 +411,7 @@
           <span class="timeline-period">anos · 1978–2013</span>
         </div>
         <div class="timeline-body">
-          <div class="timeline-company">CETEL / TELERJ / TELEMAR / OI</div>
+          <div class="timeline-company">TELEMAR / OI</div>
           <div class="timeline-role">Gerente · Engenheiro Sênior</div>
           <p class="timeline-desc">Três décadas e meia na Companhia Telefônica do Estado do Rio de Janeiro. Planejamento, projeto, implantação e manutenção de redes. Negociação de grandes contratos, liderança multidisciplinar e controle financeiro de projetos.</p>
         </div>
@@ -429,9 +443,9 @@
         <div class="cred-sub">Desde 06/12/1985</div>
       </div>
       <div class="cred-card">
-        <div class="cred-label">Registro CREA-SC</div>
+        <div class="cred-label">Visto Profissional CREA-SC</div>
         <div class="cred-value">222656-5</div>
-        <div class="cred-sub">Atuação nacional</div>
+        <div class="cred-sub">Habilitado para exercer atividade em SC</div>
       </div>
       <div class="cred-card">
         <div class="cred-label">RNP – CONFEA</div>
@@ -546,7 +560,7 @@
   </div>
 
   <div class="footer">
-    <div class="footer-text">© 2025 Alcyone Cunha Junior · CREA-RJ 1985104856 · CREA-SC 222656-5 · Eng. Segurança do Trabalho · Eng. Eletricista</div>
+    <div class="footer-text">© 2026 Alcyone Cunha Junior · CREA-RJ 1985104856 · CREA-SC 222656-5 · Eng. Segurança do Trabalho · Eng. Eletricista</div>
     <div class="footer-gold">ACJ</div>
   </div>
 
