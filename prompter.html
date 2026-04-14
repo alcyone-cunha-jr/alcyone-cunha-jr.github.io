@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompter – Alcyone Cunha Junior</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #000;
+    color: #fff;
+    font-family: Georgia, serif;
+    overflow: hidden;
+    height: 100vh;
+    user-select: none;
+  }
+
+  /* ══ BARRA SUPERIOR ══ */
+  #topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(0,0,0,0.92);
+    border-bottom: 2px solid #b8943f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .version-btns { display: flex; gap: 8px; }
+  .version-btn {
+    font-family: 'Georgia', serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    border: 1px solid #b8943f;
+    background: transparent;
+    color: #b8943f;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all .2s;
+  }
+  .version-btn.active { background: #b8943f; color: #000; }
+
+  .controls { display: flex; align-items: center; gap: 14px; }
+
+  .ctrl-btn {
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background .15s;
+    line-height: 1;
+  }
+  .ctrl-btn:hover { background: rgba(255,255,255,0.1); }
+  .ctrl-btn.play-btn { font-size: 24px; color: #b8943f; }
+
+  .speed-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 1px;
+  }
+  #speedVal {
+    font-size: 13px;
+    color: #b8943f;
+    min-width: 28px;
+    text-align: center;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 80px; height: 4px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+    outline: none;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #b8943f;
+    cursor: pointer;
+  }
+
+  .fullscreen-btn {
+    font-size: 16px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.4);
+    cursor: pointer;
+    padding: 4px;
+  }
+  .fullscreen-btn:hover { color: #fff; }
+
+  /* ══ LINHA GUIA ══ */
+  #guide-line {
+    position: fixed;
+    top: 50%;
+    left: 0; right: 0;
+    height: 2px;
+    background: rgba(184,148,63,0.3);
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  /* ══ ÁREA DE SCROLL ══ */
+  #scroll-area {
+    position: fixed;
+    top: 56px; left: 0; right: 0; bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    padding: 0 10vw;
+  }
+  #scroll-area::-webkit-scrollbar { display: none; }
+
+  #content {
+    padding-top: calc(50vh - 56px);
+    padding-bottom: 60vh;
+  }
+
+  /* ══ CENAS ══ */
+  .cena {
+    margin-bottom: 5vh;
+    opacity: 0.25;
+    transition: opacity 0.4s;
+  }
+  .cena.active { opacity: 1; }
+
+  .cena-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #b8943f;
+    margin-bottom: 16px;
+    font-family: 'Georgia', serif;
+  }
+
+  .cena-text {
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.55;
+    color: #ffffff;
+    font-weight: normal;
+  }
+
+  .cena-text em {
+    color: #b8943f;
+    font-style: normal;
+    font-weight: bold;
+  }
+
+  .cena-divider {
+    width: 60px;
+    height: 2px;
+    background: rgba(184,148,63,0.4);
+    margin-top: 32px;
+  }
+
+  /* ══ MODO ESCURO TOTAL ══ */
+  body.darkmode #topbar { opacity: 0; pointer-events: none; }
+  body.darkmode #guide-line { display: none; }
+
+  /* ══ INSTRUÇÃO INICIAL ══ */
+  #start-msg {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.3);
+    z-index: 200;
+    text-align: center;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- BARRA SUPERIOR -->
+<div id="topbar">
+  <div class="version-btns">
+    <button class="version-btn active" onclick="setVersion('geral', this)">🎬 Geral</button>
+    <button class="version-btn" onclick="setVersion('juizes', this)">⚖ Juízes</button>
+    <button class="version-btn" onclick="setVersion('empresarios', this)">🏢 Empresários</button>
+  </div>
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="resetScroll()" title="Voltar ao início">⏮</button>
+    <button class="ctrl-btn play-btn" id="playBtn" onclick="togglePlay()" title="Play / Pausa">▶</button>
+    <button class="ctrl-btn" onclick="stepBack()" title="Cena anterior">◀</button>
+    <button class="ctrl-btn" onclick="stepNext()" title="Próxima cena">▶▶</button>
+
+    <div class="speed-wrap">
+      VELOC
+      <input type="range" id="speedSlider" min="1" max="10" value="4" oninput="updateSpeed(this.value)">
+      <span id="speedVal">4</span>
+    </div>
+
+    <button class="fullscreen-btn" onclick="toggleFullscreen()" title="Tela cheia">⛶</button>
+  </div>
+</div>
+
+<!-- LINHA GUIA -->
+<div id="guide-line"></div>
+
+<!-- ÁREA DE SCROLL -->
+<div id="scroll-area" onscroll="updateActiveCena()">
+  <div id="content"></div>
+</div>
+
+<div id="start-msg">Toque ▶ para iniciar · Espaço para pausar · ← → para navegar</div>
+
+<script>
+const roteiros = {
+  geral: [
+    {
+      label: "Cena 01 · Identidade · 0:00–0:15",
+      text: "Meu nome é <em>Alcyone Cunha Junior</em>. Sou <em>Engenheiro de Segurança do Trabalho</em>, com formação em engenharia elétrica na área de eletrônica, registro no CREA-RJ e visto profissional no CREA-SC."
+    },
+    {
+      label: "Cena 02 · O que faço · 0:15–0:38",
+      text: "Atuo em duas frentes. Elaboro <em>laudos técnicos e periciais</em> em engenharia elétrica, eletrônica, telecomunicações e segurança do trabalho — e presto consultoria para empresas que precisam se manter em conformidade com a <em>legislação trabalhista e de segurança</em>."
+    },
+    {
+      label: "Cena 03 · Incêndio e Pânico · 0:38–0:58",
+      text: "Também elaboro o <em>PSCIP</em> — o Plano de Segurança Contra Incêndio e Pânico — para aprovação junto ao Corpo de Bombeiros de Santa Catarina. Para quem precisa regularizar a empresa e <em>garantir o alvará</em>."
+    },
+    {
+      label: "Cena 04 · Trajetória · 0:58–1:16",
+      text: "Tenho mais de <em>40 anos de carreira na engenharia</em>, passando por grandes empresas como TELEMAR, OI e Logictel. E formação específica em perícias judiciais pela <em>Universidade Federal Fluminense</em> e pela <em>Sociedade Brasileira de Engenharia de Segurança</em>."
+    },
+    {
+      label: "Cena 05 · Contato · 1:16–1:30",
+      text: "Atendo no <em>Oeste de Santa Catarina</em> e, a combinar, em todo o Brasil. Se precisar de um laudo técnico, uma consultoria de segurança ou um projeto contra Incêndio e Pânico — <em>me chame. Vamos conversar.</em>"
+    }
+  ],
+  juizes: [
+    {
+      label: "Cena 01 · Identidade · 0:00–0:15",
+      text: "Meu nome é <em>Alcyone Cunha Junior</em>. Sou <em>Engenheiro de Segurança do Trabalho</em>, com formação em engenharia elétrica na área de eletrônica, registro no CREA-RJ e visto profissional no CREA-SC. Atuo como <em>Perito Judicial e Assistente Técnico</em> em todo o território nacional."
+    },
+    {
+      label: "Cena 02 · O que faço · 0:15–0:38",
+      text: "Na prática, elaboro <em>laudos periciais</em> em ações trabalhistas, previdenciárias e cíveis — nas áreas de engenharia elétrica, eletrônica, telecomunicações e segurança do trabalho. Cada laudo é fundamentado nas NBRs e nas Normas Regulamentadoras, com linguagem técnica e objetiva, <em>adequada ao uso judicial</em>."
+    },
+    {
+      label: "Cena 03 · Incêndio e Pânico · 0:38–0:58",
+      text: "Também trabalho com prevenção contra incêndio. Elaboro o <em>PSCIP</em> — Plano de Segurança Contra Incêndio e Pânico — para aprovação junto ao Corpo de Bombeiros de Santa Catarina, e realizo vistorias de adequação para identificar e corrigir não-conformidades."
+    },
+    {
+      label: "Cena 04 · Credibilidade · 0:58–1:16",
+      text: "Tenho <em>mais de 40 anos de carreira na engenharia</em> elétrica e de segurança do trabalho. E uma formação específica em perícias judiciais, pela <em>Universidade Federal Fluminense</em> e pela <em>Sociedade Brasileira de Engenharia de Segurança</em>, que me deu a base metodológica para produzir laudos com rigor técnico e linguagem adequada ao contexto judicial."
+    },
+    {
+      label: "Cena 05 · Contato · 1:16–1:30",
+      text: "Minha base é o <em>Oeste de Santa Catarina</em>, mas atendo demandas em qualquer comarca do Brasil. Os dados de contato estão aqui na tela. <em>Fico à disposição.</em>"
+    }
+  ],
+  empresarios: [
+    {
+      label: "Cena 01 · Abertura · 0:00–0:15",
+      text: "<em>Sua empresa está em dia com a legislação de segurança?</em> Meu nome é Alcyone Cunha Junior — sou <em>Engenheiro de Segurança do Trabalho</em>, com formação em engenharia elétrica, e mais de 40 anos ajudando empresas a se manterem seguras e dentro da lei."
+    },
+    {
+      label: "Cena 02 · Segurança do Trabalho · 0:15–0:38",
+      text: "Elaboro laudos de insalubridade e periculosidade, faço análise e gestão de riscos — incluindo o <em>GRO e o PGR</em> exigidos pela NR-01 — e realizo vistorias e pareceres técnicos. O objetivo é simples: <em>menos multas, menos passivo trabalhista</em> e mais segurança para quem trabalha na sua empresa."
+    },
+    {
+      label: "Cena 03 · Incêndio e Pânico · 0:38–0:58",
+      text: "Também elaboro o <em>PSCIP</em> — o projeto completo de segurança contra incêndio e pânico — desde o projeto até a aprovação no Corpo de Bombeiros. Tudo para regularizar sua empresa, <em>garantir o alvará</em> e manter o negócio protegido."
+    },
+    {
+      label: "Cena 04 · Trajetória · 0:58–1:16",
+      text: "Tenho décadas de carreira técnica em grandes empresas — <em>TELEMAR, OI e Logictel</em>. É com essa base sólida em engenharia que hoje ofereço laudos e projetos com seriedade, atenção ao detalhe e linguagem clara."
+    },
+    {
+      label: "Cena 05 · Contato · 1:16–1:30",
+      text: "Atendo principalmente no Oeste de Santa Catarina, mas posso atender em outros estados também — <em>é só a gente conversar</em>. Me chame no WhatsApp. Vamos trabalhar juntos."
+    }
+  ]
+};
+
+let currentVersion = 'juizes';
+let isPlaying = false;
+let scrollInterval = null;
+let speed = 4;
+let currentCena = 0;
+
+function buildContent(version) {
+  const content = document.getElementById('content');
+  content.innerHTML = '';
+  roteiros[version].forEach((cena, i) => {
+    const div = document.createElement('div');
+    div.className = 'cena' + (i === 0 ? ' active' : '');
+    div.id = 'cena-' + i;
+    div.innerHTML = `
+      <div class="cena-label">${cena.label}</div>
+      <div class="cena-text">${cena.text}</div>
+      <div class="cena-divider"></div>
+    `;
+    content.appendChild(div);
+  });
+  updateActiveCena();
+}
+
+function setVersion(v, btn) {
+  currentVersion = v;
+  document.querySelectorAll('.version-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  stopScroll();
+  currentCena = 0;
+  buildContent(v);
+  document.getElementById('scroll-area').scrollTop = 0;
+}
+
+function updateActiveCena() {
+  const area = document.getElementById('scroll-area');
+  const guideY = window.innerHeight / 2;
+  let closest = 0;
+  let minDist = Infinity;
+  roteiros[currentVersion].forEach((_, i) => {
+    const el = document.getElementById('cena-' + i);
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const dist = Math.abs(rect.top + rect.height / 2 - guideY);
+    if (dist < minDist) { minDist = dist; closest = i; }
+  });
+  currentCena = closest;
+  document.querySelectorAll('.cena').forEach((el, i) => {
+    el.classList.toggle('active', i === closest);
+  });
+}
+
+function scrollToCena(index) {
+  const el = document.getElementById('cena-' + index);
+  if (!el) return;
+  const area = document.getElementById('scroll-area');
+  const elTop = el.offsetTop;
+  const elH = el.offsetHeight;
+  const areaH = area.clientHeight;
+  area.scrollTo({ top: elTop - areaH / 2 + elH / 2, behavior: 'smooth' });
+}
+
+function togglePlay() {
+  isPlaying ? stopScroll() : startScroll();
+}
+
+function startScroll() {
+  isPlaying = true;
+  document.getElementById('playBtn').textContent = '⏸';
+  document.getElementById('start-msg').style.display = 'none';
+  clearInterval(scrollInterval);
+  scrollInterval = setInterval(() => {
+    const area = document.getElementById('scroll-area');
+    area.scrollTop += speed * 0.4;
+    updateActiveCena();
+  }, 30);
+}
+
+function stopScroll() {
+  isPlaying = false;
+  document.getElementById('playBtn').textContent = '▶';
+  clearInterval(scrollInterval);
+}
+
+function resetScroll() {
+  stopScroll();
+  currentCena = 0;
+  document.getElementById('scroll-area').scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function stepNext() {
+  stopScroll();
+  if (currentCena < roteiros[currentVersion].length - 1) {
+    currentCena++;
+    scrollToCena(currentCena);
+  }
+}
+
+function stepBack() {
+  stopScroll();
+  if (currentCena > 0) {
+    currentCena--;
+    scrollToCena(currentCena);
+  }
+}
+
+function updateSpeed(v) {
+  speed = parseInt(v);
+  document.getElementById('speedVal').textContent = v;
+}
+
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+// Teclado
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space') { e.preventDefault(); togglePlay(); }
+  if (e.code === 'ArrowRight' || e.code === 'ArrowDown') { e.preventDefault(); stepNext(); }
+  if (e.code === 'ArrowLeft' || e.code === 'ArrowUp') { e.preventDefault(); stepBack(); }
+  if (e.code === 'Home') resetScroll();
+  if (e.key === '+' || e.key === '=') {
+    const s = document.getElementById('speedSlider');
+    s.value = Math.min(10, parseInt(s.value) + 1);
+    updateSpeed(s.value);
+  }
+  if (e.key === '-') {
+    const s = document.getElementById('speedSlider');
+    s.value = Math.max(1, parseInt(s.value) - 1);
+    updateSpeed(s.value);
+  }
+});
+
+// Touch (swipe)
+let touchStartY = 0;
+document.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; });
+document.addEventListener('touchend', e => {
+  const dy = touchStartY - e.changedTouches[0].clientY;
+  if (Math.abs(dy) > 50) { dy > 0 ? stepNext() : stepBack(); }
+});
+
+// Init
+buildContent('geral');
+</script>
+</body>
+</html>
