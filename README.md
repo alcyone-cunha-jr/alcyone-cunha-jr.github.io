@@ -4,19 +4,20 @@ Site estático (apenas HTML + CSS + JS inline) publicável diretamente no GitHub
 
 ## Conteúdo
 
-- `index.html` — Apresentação com 3 trilhas (Juízes, Advogados, Empresas/Condomínios)
-- `curriculo.html` — Currículo completo
+- `index.html` — Apresentação com 3 trilhas (Juízes, Advogados, Empresários/Gestores)
+- `curriculo.html` — Currículo completo (foto embutida em base64)
+- `foto_alcyone_hd.jpg` — Retrato usado na capa da apresentação
 - `README.md` — este arquivo
 
-Os dois HTMLs são autônomos: não dependem de imagens externas (a foto está embutida em base64 no currículo) nem de qualquer build. Só precisam de conexão para carregar as fontes do Google Fonts.
+Os HTMLs não dependem de nenhum build. O `index.html` referencia `foto_alcyone_hd.jpg` como arquivo local — por isso os dois precisam ser enviados juntos. As fontes são carregadas do Google Fonts (exigem internet no visitante).
 
 ## Como publicar no GitHub Pages
 
 1. Crie um repositório novo no GitHub (ex.: `portfolio` ou `alcyone-cunha`).
-2. Faça upload dos três arquivos (`index.html`, `curriculo.html`, `README.md`) na raiz do repositório — ou clone localmente, copie e dê push:
+2. Faça upload dos quatro arquivos (`index.html`, `curriculo.html`, `foto_alcyone_hd.jpg`, `README.md`) na raiz do repositório — ou clone localmente, copie e dê push:
    ```bash
    git clone https://github.com/<seu-usuario>/<seu-repo>.git
-   cp index.html curriculo.html README.md <seu-repo>/
+   cp index.html curriculo.html foto_alcyone_hd.jpg README.md <seu-repo>/
    cd <seu-repo>
    git add .
    git commit -m "Publica portfólio e currículo"

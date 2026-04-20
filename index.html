@@ -67,6 +67,20 @@
   }
   .cover-divider { width:70px; height:2px; background:linear-gradient(90deg,var(--gold) 60%,var(--red-light) 100%); margin-bottom:20px; }
 
+  /* HERO ROW – headline à esquerda, foto à direita */
+  .cover-hero-row {
+    display:flex; align-items:center; gap:36px; margin-bottom:14px;
+  }
+  .cover-hero-text { flex:1 1 auto; min-width:0; }
+  .cover-hero-photo {
+    flex:0 0 auto;
+  }
+  .cover-hero-photo img {
+    display:block; width:140px; height:180px; object-fit:cover; object-position:center 22%;
+    border:2px solid rgba(212,175,106,0.55);
+    box-shadow:0 8px 24px rgba(0,0,0,0.35);
+  }
+
   /* INTRODUÇÃO ÀS 3 PORTAS */
   .entry-intro {
     margin-bottom:16px; max-width:820px;
@@ -396,6 +410,8 @@
     .entry-title { font-size:13px; }
     .entry-keyword { font-size:8px; }
     .entry-symbol { font-size:18px; }
+    .cover-hero-row { gap:22px; }
+    .cover-hero-photo img { width:110px; height:142px; }
   }
 
   /* Mobile — aí sim empilha, mas só em tela muito estreita */
@@ -404,6 +420,8 @@
     .cover-inner { padding:32px 22px 24px; }
     .cover-promise { font-size:24px; }
     .cover-subpromise { font-size:20px; }
+    .cover-hero-row { flex-direction:column-reverse; align-items:flex-start; gap:14px; }
+    .cover-hero-photo img { width:96px; height:124px; }
     .entry-grid { grid-template-columns:1fr; gap:8px; }
     .entry-btn { padding:12px 14px; }
     .entry-title { font-size:15px; }
@@ -432,16 +450,23 @@
   <div class="cover-stripe"><div class="cover-stripe-gold"></div><div class="cover-stripe-red"></div></div>
 
   <div class="cover-inner">
-    <div class="cover-label">Portfólio Profissional · Perícia, Riscos &amp; Conformidade</div>
+    <div class="cover-hero-row">
+      <div class="cover-hero-text">
+        <div class="cover-label">Portfólio Profissional · Perícia, Riscos &amp; Conformidade</div>
 
-    <h1 class="cover-promise">
-      Reduza incertezas com fundamentos técnicos<br>
-      que sustentam decisões.
-    </h1>
+        <h1 class="cover-promise">
+          Reduza incertezas com fundamentos técnicos<br>
+          que sustentam decisões.
+        </h1>
 
-    <p class="cover-subpromise">
-      40 anos entre escritório e área operacional.
-    </p>
+        <p class="cover-subpromise">
+          40 anos entre escritório e área operacional.
+        </p>
+      </div>
+      <div class="cover-hero-photo">
+        <img src="foto_alcyone_hd.jpg" alt="Alcyone Cunha Junior – Engenheiro, Perito Técnico">
+      </div>
+    </div>
 
     <div class="cover-divider"></div>
 
@@ -530,7 +555,7 @@
       <h2 class="section-title">Quem sou eu</h2>
 
       <p class="bio-text">
-        Sou <span class="hl-gold">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-gold">Engenheiro de Segurança do Trabalho</span>, com mais de 40 anos de exercício técnico — 35 anos em <strong>Telemar e Oi</strong>, mais de uma década como Gerente Sênior de Implantação na <strong>Logictel</strong> e, desde 2013, atuação pericial independente. Cobri o ciclo completo: planejamento, projeto, implantação e manutenção de redes aéreas e subterrâneas, galerias, dutos e obras de infraestrutura associada, sempre em interface direta com a segurança do trabalho.
+        Sou <span class="hl-gold">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-gold">Engenheiro de Segurança do Trabalho</span>, com <strong>48 anos de engenharia em campo</strong> — 35 anos na <strong>Telemar e Oi</strong> e quase 13 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>. Cobri o ciclo completo: planejamento, projeto, implantação e manutenção de redes aéreas e subterrâneas, galerias, dutos e obras de infraestrutura associada, sempre em interface direta com a segurança do trabalho. <strong>Habilitado em Perícia Judicial pelo TJRJ</strong>, disponível para atuação como Perito Judicial e elaboração de laudos e pareceres técnicos.
       </p>
       <p class="bio-text">
         Essa vivência de campo — e não apenas de escritório — é o que me permite trabalhar a matéria pericial com <strong>clareza</strong> na exposição dos fatos, <strong>imparcialidade</strong> vinculada à técnica (não à parte), <strong>objetividade</strong> nas conclusões e <strong>didática</strong> suficiente para que Vossa Excelência forme convicção sem ruído técnico.
@@ -618,10 +643,10 @@
       <h2 class="section-title">Quem sou eu</h2>
 
       <p class="bio-text">
-        Sou <span class="hl-gold">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-gold">Engenheiro de Segurança do Trabalho</span> com mais de 40 anos no ciclo completo da engenharia — 35 anos em <strong>Telemar e Oi</strong>, 12+ anos como Gerente Sênior de Implantação na <strong>Logictel</strong>, e mais de uma década atuando como perito e assistente técnico. Projeto, execução de redes aéreas e subterrâneas, galerias, dutos e manutenção de sistemas em operação — tudo em ambientes de risco real (elétrico, altura, escavação, confinado).
+        Sou <span class="hl-gold">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-gold">Engenheiro de Segurança do Trabalho</span> com <strong>48 anos no ciclo completo da engenharia</strong> — 35 anos na <strong>Telemar e Oi</strong> e quase 13 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>. Projeto, execução de redes aéreas e subterrâneas, galerias, dutos e manutenção de sistemas em operação — em ambientes de risco real (elétrico, altura, escavação, confinado). <strong>Habilitado em Perícia Judicial pelo TJRJ</strong>, disponível para atuar como Assistente Técnico, elaborar pareceres e contraditar laudos adversos.
       </p>
       <p class="bio-text">
-        Essa bagagem técnica é o que me permite <span class="hl-gold">fortalecer a sua tese</span> onde ela já tem base e <span class="hl-gold">abrir a fissura</span> onde a perícia adversa passou de leve — falha metodológica, lacuna normativa, salto lógico, nexo causal mal demonstrado. Quem viveu as quatro etapas (projeto, obra, operação e manutenção) enxerga responsabilidade e causa raiz onde o perito de gabinete não enxerga.
+        Essa bagagem técnica é o que me permite <span class="hl-gold">fortalecer a sua tese</span> onde ela já tem base e <span class="hl-gold">abrir a fissura</span> onde a perícia adversa passou de leve — falha metodológica, lacuna normativa, salto lógico, nexo causal mal demonstrado. Quem viveu as quatro etapas (projeto, obra, operação e manutenção) enxerga responsabilidade e causa raiz onde laudos superficiais passam batido.
       </p>
       <p class="bio-text">
         Como assistente técnico, meu trabalho é aumentar a probabilidade de êxito: quesitos estratégicos que cercam a perícia, crítica ao laudo adverso com respaldo documental e parecer técnico que faz parte da prova — não apenas da argumentação.
@@ -708,7 +733,7 @@
       <h2 class="section-title">Quem sou eu</h2>
 
       <p class="bio-text">
-        Sou <span class="hl-red">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-red">Engenheiro de Segurança do Trabalho</span> com mais de 40 anos de operação real — 35 anos em <strong>Telemar e Oi</strong>, mais de 12 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>, e atuação independente como perito e consultor desde 2013. Passei essas décadas dentro do que hoje faz empresário e síndico perder sono: rede elétrica viva, espaço confinado, trabalho em altura, escavação, obra com equipe em risco — o ciclo completo do planejamento à manutenção.
+        Sou <span class="hl-red">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-red">Engenheiro de Segurança do Trabalho</span> com <strong>48 anos de operação real</strong> — 35 anos na <strong>Telemar e Oi</strong> e quase 13 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>. Passei essas décadas dentro do que hoje faz empresário e síndico perder sono: rede elétrica viva, espaço confinado, trabalho em altura, escavação, obra com equipe em risco — o ciclo completo do planejamento à manutenção. <strong>Disponível para elaboração de laudos técnicos, análise de riscos (NR-01, GRO/PGR), PSCIP e consultoria técnica em engenharia de segurança.</strong>
       </p>
       <p class="bio-text">
         Quando eu avalio uma operação ou um prédio, <span class="hl-red">não aplico checklist</span> — eu reconheço onde o acidente começa, onde a multa do MTE vai bater, onde o processo trabalhista vai nascer e onde o seguro pode negar cobertura. Separo o que precisa ser resolvido agora, o que é médio prazo e o que é exagero de fornecedor querendo faturar.

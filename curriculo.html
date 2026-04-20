@@ -252,6 +252,51 @@
     .job, .edu { page-break-inside: avoid; }
   }
   @page { size: A4; margin: 8mm 0; }
+
+  /* ═══ MOBILE / TABLET — impede que contato e credenciais vazem a tarja ═══ */
+  @media (max-width: 760px) {
+    body { padding: 0 10px; }
+    .page { max-width: 100%; }
+    .gh-topbar { padding: 9px 16px; }
+    .gh-topbar a { font-size: 10px; letter-spacing: 1.2px; }
+    .gh-topbar .brand { font-size: 13px; letter-spacing: 2px; }
+    .header {
+      grid-template-columns: 96px 1fr;
+      grid-template-areas:
+        "photo main"
+        "contact contact";
+      gap: 14px;
+      padding: 14px 16px;
+      align-items: start;
+    }
+    .photo-frame { width: 96px; height: 96px; grid-area: photo; }
+    .header-main { grid-area: main; padding-top: 0; }
+    .h-name { font-size: 20px; letter-spacing: 1.2px; margin-bottom: 6px; }
+    .h-titles { font-size: 12px; line-height: 1.4; }
+    .header-contact {
+      grid-area: contact;
+      min-width: 0;
+      border-top: 1px solid rgba(212,175,106,0.35);
+      padding-top: 10px;
+      margin-top: 4px;
+      font-size: 11px;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+    .header-contact .phone { font-size: 12px; }
+    .header-contact .mail { font-size: 10.5px; word-break: break-all; }
+    .cred-bar { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .cred { padding: 10px 6px; }
+    .cred-value { font-size: 13px; }
+    .cred-label { font-size: 9.5px; }
+  }
+  @media (max-width: 420px) {
+    .h-name { font-size: 18px; letter-spacing: 1px; }
+    .h-titles { font-size: 11px; }
+    .photo-frame { width: 82px; height: 82px; }
+    .header { grid-template-columns: 82px 1fr; gap: 12px; padding: 12px 14px; }
+    .gh-topbar { padding: 8px 12px; }
+  }
   /* topbar GitHub Pages */
   .gh-topbar {
     position:sticky; top:0; z-index:999; background:#080f1a;
@@ -321,7 +366,7 @@
       <div class="cred-label">Eng. Eletricista –<br>Eletrônica</div>
     </div>
     <div class="cred">
-      <div class="cred-value">40+ anos</div>
+      <div class="cred-value">48 anos</div>
       <div class="cred-label">Experiência<br>Profissional</div>
     </div>
   </div>
@@ -330,7 +375,7 @@
   <div class="section">
     <div class="section-title">Perfil Profissional</div>
     <p class="profile-text">
-      Engenheiro com mais de 40 anos de experiência em engenharia elétrica, eletrônica, telecomunicações e segurança do trabalho. Especialista na elaboração de laudos e pareceres técnicos, projetos de segurança contra incêndio e pânico (PSCIP) e análise de riscos ocupacionais. Atua como Perito Judicial, Assistente Técnico e Consultor com rigor metodológico, fundamentação normativa e linguagem objetiva — em todo o território nacional, com base no Oeste de Santa Catarina.
+      Engenheiro com <strong>48 anos de trajetória</strong> em engenharia elétrica, eletrônica, telecomunicações e segurança do trabalho. <strong>Habilitado em Perícia Judicial pelo TJRJ</strong>, disponível para elaboração de laudos e pareceres técnicos, atuação como Perito Judicial e Assistente Técnico, projetos de segurança contra incêndio e pânico (PSCIP) e análise de riscos ocupacionais. Rigor metodológico, fundamentação normativa e linguagem objetiva — em todo o território nacional, com base no Oeste de Santa Catarina.
     </p>
   </div>
 
@@ -339,31 +384,31 @@
     <div class="section-title">Experiência Profissional</div>
 
     <div class="job">
-      <div class="job-company">Atuação Pericial Independente</div>
-      <div class="job-role">Perito Judicial · Assistente Técnico · Projetista · Consultor <span class="period">· 2013 – atual</span></div>
+      <div class="job-company">Atuação Pericial e Consultoria Técnica</div>
+      <div class="job-role">Perito Judicial · Assistente Técnico · Projetista · Consultor</div>
       <ul class="job-list">
-        <li>Elaboração de laudos periciais em ações trabalhistas, previdenciárias e cíveis</li>
+        <li>Disponível para elaboração de laudos periciais em ações trabalhistas, previdenciárias e cíveis</li>
         <li>Projetos de Segurança contra Incêndio e Pânico (PSCIP) para aprovação junto ao CBMSC</li>
         <li>Vistorias de adequação e laudos de conformidade com base na legislação estadual vigente</li>
         <li>Análise e gestão de riscos ocupacionais — GRO e PGR (NR-01)</li>
         <li>Laudos de insalubridade e periculosidade (NR-15 / NR-16)</li>
+        <li>Habilitação específica pelo curso de Perícia Judicial e Processo Judicial Eletrônico – TJRJ</li>
       </ul>
     </div>
 
     <div class="job">
       <div class="job-company">Logictel</div>
-      <div class="job-role">Gerente Sênior de Implantação <span class="period">· Mais de 12 anos</span></div>
+      <div class="job-role">Gerente Sênior de Implantação <span class="period">· 14/02/2013 – 31/12/2025 · 12 anos e 10 meses</span></div>
       <ul class="job-list">
         <li>Liderança de projetos de implantação de redes e infraestrutura de telecomunicações</li>
         <li>Gestão de contratos estratégicos e interface com áreas de engenharia e negócios</li>
         <li>Monitoramento de KPIs financeiros e encerramento de projetos com visão de PMO</li>
-        <li>Mais de 12 anos de mentoria e desenvolvimento de equipes técnicas</li>
       </ul>
     </div>
 
     <div class="job">
-      <div class="job-company">CETEL / TELERJ / TELEMAR / OI</div>
-      <div class="job-role">Gerente · Engenheiro Sênior <span class="period">· 01/02/1978 – 04/02/2013 · 35 anos</span></div>
+      <div class="job-company">TELEMAR / OI</div>
+      <div class="job-role">Gerente · Engenheiro Sênior <span class="period">· 01/02/1978 – 01/02/2013 · 35 anos</span></div>
       <ul class="job-list">
         <li>Planejamento, projeto, implantação e manutenção de redes de telecomunicações</li>
         <li>Sólida experiência em empresas de grande e médio porte com visão estratégica</li>
