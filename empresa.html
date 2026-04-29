@@ -1,0 +1,245 @@
+<\!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engenharia de Segurança – Alcyone Cunha Junior</title>
+<meta name="description" content="Diagnóstico de riscos, PSCIP, laudos de insalubridade/periculosidade e consultoria técnica para empresas, condomínios e gestores.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#0d1b2e; --navy-mid:#162542; --gold:#b8943f; --gold-light:#d4af6a;
+    --gold-soft:#e8d9b0; --red:#8b1a1a; --red-light:#c0392b; --red-soft:#e67069;
+    --cream:#f8f4ed; --cream-dark:#efe8d8; --white:#ffffff;
+    --text:#1a1a2e; --text-light:#4a4a6a; --text-soft:#6a6a88;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Cormorant Garamond',Georgia,serif;background:var(--cream);color:var(--text);line-height:1.55;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+
+  nav.topbar{position:sticky;top:0;z-index:999;background:#080f1a;display:flex;justify-content:space-between;align-items:center;padding:12px 40px;border-bottom:2px solid var(--gold);}
+  nav.topbar a{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:opacity .2s;}
+  nav.topbar a.muted{color:var(--white);}
+  nav.topbar a:hover{opacity:.7;}
+  nav.topbar .brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold);letter-spacing:4px;}
+
+  /* Cover com acento vermelho para empresa */
+  .cover{background:var(--navy);padding:56px 80px 48px;position:relative;overflow:hidden;}
+  .cover::before{content:'';position:absolute;top:-100px;right:-100px;width:520px;height:520px;border:80px solid rgba(192,57,43,0.07);border-radius:50%;}
+  .cover::after{content:'';position:absolute;bottom:-80px;left:-80px;width:360px;height:360px;border:60px solid rgba(192,57,43,0.06);border-radius:50%;}
+  .cover-stripe{display:flex;height:6px;}
+  .cover-stripe-red{flex:3;background:var(--red-light);}
+  .cover-stripe-gold{flex:1;background:var(--gold);}
+  .cover-inner{max-width:1180px;margin:0 auto;position:relative;z-index:1;}
+  .cover-kicker{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--red-soft);margin-bottom:16px;}
+  .cover-hero-row{display:flex;align-items:center;gap:36px;margin-bottom:24px;}
+  .cover-hero-text{flex:1 1 auto;min-width:0;}
+  .cover-promise{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--white);line-height:1.15;margin-bottom:14px;max-width:820px;}
+  .cover-promise .hl-red{color:var(--red-soft);font-style:italic;}
+  .cover-subpromise{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;font-style:italic;color:var(--white);line-height:1.4;max-width:700px;}
+  .cover-hero-photo{flex:0 0 auto;}
+  .cover-hero-photo img{display:block;width:130px;height:168px;object-fit:cover;object-position:center 22%;border:2px solid rgba(192,57,43,0.45);box-shadow:0 8px 24px rgba(0,0,0,0.35);}
+  .cover-divider{width:70px;height:2px;background:linear-gradient(90deg,var(--red-light) 60%,var(--gold) 100%);margin:20px 0;}
+  .cover-footer-row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;padding-top:16px;border-top:1px solid rgba(192,57,43,0.2);}
+  .author-compact{font-family:'Montserrat',sans-serif;font-size:11px;color:var(--white);letter-spacing:1px;line-height:1.55;}
+  .author-compact strong{color:var(--red-soft);font-weight:700;letter-spacing:1.5px;}
+  .author-compact .author-name{font-family:'Playfair Display',serif;font-size:17px;color:var(--white);letter-spacing:0.5px;font-weight:600;display:block;margin-bottom:3px;}
+  .cover-contact-small{text-align:right;font-family:'Montserrat',sans-serif;font-size:11px;color:var(--white);letter-spacing:0.8px;line-height:1.55;}
+  .cover-contact-small strong{color:var(--red-soft);font-weight:700;}
+
+  .section{padding:44px 80px;}
+  .section.cream{background:var(--cream-dark);}
+  .section.red-bg{background:var(--red);padding:44px 80px;}
+  .section-label{font-family:'Montserrat',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .section-label.red{color:var(--red-soft);}
+  .section-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--navy);margin-bottom:22px;line-height:1.2;}
+  .section-title.white{color:var(--white);}
+  .bio-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;line-height:1.55;color:var(--text);max-width:740px;}
+  .bio-text+.bio-text{margin-top:16px;}
+  .bio-text .hl-red{color:var(--red-light);font-weight:500;font-style:italic;}
+  .keyword-badge{display:inline-flex;align-items:center;gap:14px;margin-top:30px;padding:18px 26px;background:rgba(192,57,43,0.1);border-left:4px solid var(--red-light);}
+  .keyword-badge-prefix{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);}
+  .keyword-badge-word{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--red-light);letter-spacing:0.5px;}
+
+  .how-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px;}
+  .how-card{background:var(--white);padding:26px 24px;border-top:3px solid var(--red-light);}
+  .how-card h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.25;}
+  .how-card p{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text-light);line-height:1.5;}
+
+  /* Risk grid */
+  .risk-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px;}
+  .risk-item{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);padding:22px 20px;}
+  .risk-item h5{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red-soft);margin-bottom:8px;}
+  .risk-item p{font-family:'Cormorant Garamond',serif;font-size:16px;color:rgba(255,255,255,0.82);line-height:1.45;}
+
+  .tab-cta{background:var(--navy);padding:44px 80px;text-align:center;}
+  .tab-cta-kicker{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--red-soft);margin-bottom:12px;}
+  .tab-cta h3{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.15;}
+  .tab-cta h3 .hl-red{color:var(--red-soft);font-style:italic;}
+  .tab-cta p{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--white);max-width:620px;margin:0 auto 26px;line-height:1.5;}
+  .cta-btn-row{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .cta-btn{display:inline-flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:15px 26px;text-decoration:none;border:1px solid var(--red-light);color:var(--white);background:var(--red-light);transition:all .2s;border-radius:2px;}
+  .cta-btn:hover{background:var(--red);border-color:var(--red);}
+  .cta-btn.outline{background:transparent;color:var(--red-soft);}
+  .cta-btn.outline:hover{background:rgba(192,57,43,0.12);}
+
+  .site-footer{background:#080f1a;color:var(--white);padding:48px 80px 0;}
+  .footer-top{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:36px;padding-bottom:32px;border-bottom:1px solid rgba(184,148,63,0.3);}
+  .footer-col h5{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .footer-col p,.footer-col li{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--white);line-height:1.5;}
+  .footer-col ul{list-style:none;padding:0;}
+  .footer-col li{padding:2px 0;}
+  .footer-col strong{color:var(--gold);font-weight:700;}
+  .footer-bottom{max-width:960px;margin:0 auto;padding:18px 0 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+  .footer-bottom-text{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:500;color:var(--white);letter-spacing:0.8px;}
+  .footer-acj{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--gold);letter-spacing:5px;}
+
+  @media(max-width:900px){.cover{padding:28px 28px 24px;}.cover-promise{font-size:26px;}.cover-hero-row{gap:22px;}.cover-hero-photo img{width:110px;height:142px;}.how-grid,.risk-grid{grid-template-columns:1fr;}}
+  @media(max-width:520px){nav.topbar{padding:10px 20px;}.cover{padding:28px 22px 24px;}.cover-promise{font-size:22px;}.cover-subpromise{font-size:19px;}.cover-hero-row{flex-direction:column-reverse;align-items:flex-start;gap:14px;}.cover-hero-photo img{width:96px;height:124px;}.cover-footer-row{flex-direction:column;align-items:flex-start;gap:18px;}.cover-contact-small{text-align:left;}.section,.tab-cta,.site-footer{padding:36px 22px;}.section-title,.tab-cta h3{font-size:24px;}.footer-top{grid-template-columns:1fr;gap:24px;}.footer-bottom{justify-content:flex-start;}}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="curriculo-empresa.html">Currículo →</a>
+  <span class="brand">ACJ</span>
+  <a class="muted" href="https://wa.me/5521988010557">WhatsApp</a>
+</nav>
+
+<div class="cover-stripe"><div class="cover-stripe-red"></div><div class="cover-stripe-gold"></div></div>
+
+<div class="cover" id="top">
+  <div class="cover-inner">
+    <div class="cover-hero-row">
+      <div class="cover-hero-text">
+        <div class="cover-kicker">Engenharia de Segurança · Para Empresas &amp; Condomínios</div>
+        <h1 class="cover-promise">
+          Identifique os riscos <span class="hl-red">antes que virem</span><br>
+          multa, interdição ou processo.
+        </h1>
+        <p class="cover-subpromise">48 anos entre escritório e área operacional.</p>
+      </div>
+      <div class="cover-hero-photo">
+        <img src="foto_alcyone_hd.jpg" alt="Alcyone Cunha Junior – Engenheiro de Segurança do Trabalho">
+      </div>
+    </div>
+    <div class="cover-divider"></div>
+    <div class="cover-footer-row">
+      <div class="author-compact">
+        <strong>Responsabilidade Técnica</strong>
+        <span class="author-name">Alcyone Cunha Junior</span>
+        Eng. Eletricista (Eletrônica) · Eng. de Segurança do Trabalho<br>
+        CREA-RJ 1985104856 · Visto CREA-SC 222656-5 · RNP 2001887744
+      </div>
+      <div class="cover-contact-small">
+        WhatsApp<br><strong>+55 21 98801-0557</strong><br>
+        E-mail<br><strong>alcyone.cunha.junior@hotmail.com</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<\!-- QUEM SOU EU -->
+<div class="section">
+  <div class="section-label">Apresentação · Prevenção</div>
+  <h2 class="section-title">Quem sou eu</h2>
+  <p class="bio-text">Sou <span class="hl-red">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-red">Engenheiro de Segurança do Trabalho</span> com <strong>48 anos de operação real</strong> — 35 anos na <strong>Telemar e Oi</strong> e quase 13 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>. Passei essas décadas dentro do que hoje faz empresário e síndico perder sono: rede elétrica viva, espaço confinado, trabalho em altura, escavação, obra com equipe em risco — o ciclo completo do planejamento à manutenção. <strong>Disponível para elaboração de laudos técnicos, análise de riscos (NR-01, GRO/PGR), PSCIP e consultoria técnica em engenharia de segurança.</strong></p>
+  <p class="bio-text">Quando eu avalio uma operação ou um prédio, <span class="hl-red">não aplico checklist</span> — eu reconheço onde o acidente começa, onde a multa do MTE vai bater, onde o processo trabalhista vai nascer e onde o seguro pode negar cobertura. Separo o que precisa ser resolvido agora, o que é médio prazo e o que é exagero de fornecedor querendo faturar.</p>
+  <p class="bio-text">Em uma ou duas visitas técnicas, cada risco vira um número: o que custa corrigir hoje versus o que custa depois do acidente, da autuação ou da interdição. Você decide onde investir com critério técnico, não por susto.</p>
+  <div class="keyword-badge">
+    <span class="keyword-badge-prefix">O que o negócio leva, no fim —</span>
+    <span class="keyword-badge-word">Proteção financeira</span>
+  </div>
+</div>
+
+<\!-- COMO ATUO -->
+<div class="section cream">
+  <div class="section-label">Como eu protejo o seu negócio</div>
+  <h2 class="section-title">Quatro frentes de trabalho</h2>
+  <div class="how-grid">
+    <div class="how-card">
+      <h4>Diagnóstico de riscos &amp; NR</h4>
+      <p>Mapeamento das não-conformidades e risco operacional real. Plano de adequação priorizado por impacto e urgência.</p>
+    </div>
+    <div class="how-card">
+      <h4>PSCIP &amp; Corpo de Bombeiros</h4>
+      <p>Projeto de Segurança contra Incêndio e Pânico · acompanhamento até AVCB · adequação de prédios existentes e novos.</p>
+    </div>
+    <div class="how-card">
+      <h4>Análise de acidente</h4>
+      <p>Quando o pior já aconteceu — reconstituição técnica, apuração de causa raiz e suporte à defesa administrativa ou judicial.</p>
+    </div>
+    <div class="how-card">
+      <h4>Laudo técnico para defesa</h4>
+      <p>Insalubridade, periculosidade, autuação fiscal, notificação do MPT — laudo técnico robusto para contraditório.</p>
+    </div>
+  </div>
+</div>
+
+<\!-- O QUE ESTÁ EM JOGO -->
+<div class="section red-bg">
+  <div class="section-label red">O que está em jogo</div>
+  <h2 class="section-title white">Sem suporte técnico, o custo chega sempre depois</h2>
+  <p class="bio-text" style="color:var(--white);opacity:0.85;margin-bottom:24px;">Os quatro tipos de perda mais frequentes entre empresas e condomínios sem acompanhamento de engenharia de segurança.</p>
+  <div class="risk-grid">
+    <div class="risk-item">
+      <h5>Multa e autuação</h5>
+      <p>Fiscalização MTE, Corpo de Bombeiros e agências reguladoras — multa recorrente pela mesma não-conformidade.</p>
+    </div>
+    <div class="risk-item">
+      <h5>Interdição e embargo</h5>
+      <p>Paralisação determinada pelo MPT ou auditor fiscal, com perda de faturamento e quebra de contrato.</p>
+    </div>
+    <div class="risk-item">
+      <h5>Passivo trabalhista</h5>
+      <p>Insalubridade, periculosidade e acidente viram ação judicial — sem laudo, a defesa começa perdendo.</p>
+    </div>
+    <div class="risk-item">
+      <h5>Responsabilização pessoal</h5>
+      <p>Gestor, síndico ou engenheiro respondendo civil e criminalmente por falta de diligência técnica documentada.</p>
+    </div>
+  </div>
+</div>
+
+<\!-- CTA -->
+<div class="tab-cta">
+  <div class="tab-cta-kicker">Próximo passo</div>
+  <h3>Identifique os riscos <span class="hl-red">antes que virem prejuízo</span>.</h3>
+  <p>Em uma ou duas visitas técnicas você sabe exatamente o que está em risco, quanto custa corrigir e o que não pode esperar. Sem alarmismo, sem vender o que você não precisa.</p>
+  <div class="cta-btn-row">
+    <a class="cta-btn" href="https://wa.me/5521988010557?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20de%20riscos.">Agendar diagnóstico</a>
+    <a class="cta-btn outline" href="mailto:alcyone.cunha.junior@hotmail.com?subject=Diagnóstico%20de%20riscos">Enviar e-mail</a>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-col">
+      <h5>Responsabilidade Técnica</h5>
+      <p><strong>Alcyone Cunha Junior</strong><br>Eng. Eletricista (Eletrônica) · RES 218/73 · AT.01 a 18<br>Eng. de Segurança do Trabalho · RES 359/91 · AT.01 a 18<br><br>CREA-RJ <strong>1985104856</strong> · registrado desde 1985<br>Visto Profissional CREA-SC <strong>222656-5</strong><br>RNP CONFEA <strong>2001887744</strong></p>
+    </div>
+    <div class="footer-col">
+      <h5>Formação</h5>
+      <ul>
+        <li><strong>2001</strong> · Eng. Seg. Trabalho · Souza Marques/RJ</li>
+        <li><strong>1989</strong> · Eng. Eletricista · General Roberto Lisboa/RJ</li>
+        <li><strong>1985</strong> · Tecn. Técnicas Digitais · Estácio de Sá/RJ</li>
+        <li>Perícia Judicial · UFF + SOBES</li>
+        <li>PSCIP · SOBES/RJ</li>
+        <li>Vistoria Predial · SENGE/RJ</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contato</h5>
+      <p>WhatsApp &nbsp;·&nbsp; <strong>+55 21 98801-0557</strong><br>E-mail &nbsp;·&nbsp; <strong>alcyone.cunha.junior@hotmail.com</strong><br>Base &nbsp;·&nbsp; <strong>Ponte Serrada – SC</strong><br><br>Atuação em todo o território nacional.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-text">© 2026 Alcyone Cunha Junior · CREA-RJ 1985104856 · CREA-SC 222656-5</div>
+    <div class="footer-acj">ACJ</div>
+  </div>
+</footer>
+
+</body>
+</html>
