@@ -555,7 +555,7 @@
       <h2 class="section-title">Quem sou eu</h2>
 
       <p class="bio-text">
-        Sou <span class="hl-gold">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-gold">Engenheiro de Segurança do Trabalho</span>, com <strong>48 anos de engenharia em campo</strong> — 35 anos na <strong>Telemar e Oi</strong> e quase 13 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>. Cobri o ciclo completo: planejamento, projeto, implantação e manutenção de redes aéreas e subterrâneas, galerias, dutos e obras de infraestrutura associada, sempre em interface direta com a segurança do trabalho. <strong>Habilitado em Perícia Judicial pelo TJRJ</strong>, disponível para atuação como Perito Judicial e elaboração de laudos e pareceres técnicos.
+        Sou <span class="hl-gold">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-gold">Engenheiro de Segurança do Trabalho</span>, com <strong>48 anos de engenharia em campo</strong> — 35 anos na <strong>Telemar e Oi</strong> e quase 13 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>. Cobri o ciclo completo: planejamento, projeto, implantação e manutenção de redes aéreas e subterrâneas, galerias, dutos e obras de infraestrutura associada, sempre em interface direta com a segurança do trabalho. <strong>Disponível para atuação como Perito Judicial e elaboração de laudos e pareceres técnicos.</strong>
       </p>
       <p class="bio-text">
         Essa vivência de campo — e não apenas de escritório — é o que me permite trabalhar a matéria pericial com <strong>clareza</strong> na exposição dos fatos, <strong>imparcialidade</strong> vinculada à técnica (não à parte), <strong>objetividade</strong> nas conclusões e <strong>didática</strong> suficiente para que Vossa Excelência forme convicção sem ruído técnico.
@@ -643,7 +643,7 @@
       <h2 class="section-title">Quem sou eu</h2>
 
       <p class="bio-text">
-        Sou <span class="hl-gold">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-gold">Engenheiro de Segurança do Trabalho</span> com <strong>48 anos no ciclo completo da engenharia</strong> — 35 anos na <strong>Telemar e Oi</strong> e quase 13 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>. Projeto, execução de redes aéreas e subterrâneas, galerias, dutos e manutenção de sistemas em operação — em ambientes de risco real (elétrico, altura, escavação, confinado). <strong>Habilitado em Perícia Judicial pelo TJRJ</strong>, disponível para atuar como Assistente Técnico, elaborar pareceres e contraditar laudos adversos.
+        Sou <span class="hl-gold">Engenheiro Eletricista (Eletrônica)</span> e <span class="hl-gold">Engenheiro de Segurança do Trabalho</span> com <strong>48 anos no ciclo completo da engenharia</strong> — 35 anos na <strong>Telemar e Oi</strong> e quase 13 anos como Gerente Sênior de Implantação na <strong>Logictel</strong>. Projeto, execução de redes aéreas e subterrâneas, galerias, dutos e manutenção de sistemas em operação — em ambientes de risco real (elétrico, altura, escavação, confinado). <strong>Disponível para atuar como Assistente Técnico, elaborar pareceres e contraditar laudos adversos.</strong>
       </p>
       <p class="bio-text">
         Essa bagagem técnica é o que me permite <span class="hl-gold">fortalecer a sua tese</span> onde ela já tem base e <span class="hl-gold">abrir a fissura</span> onde a perícia adversa passou de leve — falha metodológica, lacuna normativa, salto lógico, nexo causal mal demonstrado. Quem viveu as quatro etapas (projeto, obra, operação e manutenção) enxerga responsabilidade e causa raiz onde laudos superficiais passam batido.
@@ -893,13 +893,34 @@
     }, 60);
   }
 
+  // detectar deep-link: se entrou via #juiz, #advogado ou #empresa
+  const hash = window.location.hash.replace('#','');
+  const validTabs = ['juiz','advogado','empresa'];
+  const deepLinkTab = validTabs.includes(hash) ? hash : null;
+
+  // se entrou via deep-link, ocultar os outros botões de entrada
+  if (deepLinkTab) {
+    buttons.forEach(btn => {
+      if (btn.dataset.tab !== deepLinkTab) {
+        btn.style.display = 'none';
+      }
+    });
+  }
+
   // função global para o link "voltar"
   window.resetTabs = function(){
-    tabs.forEach(t => {
-      t.classList.remove('active');
-      t.setAttribute('aria-hidden','true');
-    });
-    buttons.forEach(b => b.classList.remove('active'));
+    if (deepLinkTab) {
+      // entrou via deep-link: voltar apenas para a aba de origem
+      openTab(deepLinkTab);
+    } else {
+      // visita normal: mostrar todos os botões de seleção
+      tabs.forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-hidden','true');
+      });
+      buttons.forEach(b => b.classList.remove('active'));
+    }
+    window.scrollTo({top:0, behavior:'smooth'});
   };
 
   // bind
@@ -907,10 +928,8 @@
     btn.addEventListener('click', () => openTab(btn.dataset.tab));
   });
 
-  // deep-link via hash (?tab=juiz etc.)
-  const hash = window.location.hash.replace('#','');
-  const validTabs = ['juiz','advogado','empresa'];
-  if (validTabs.includes(hash)) openTab(hash);
+  // abrir aba via deep-link
+  if (deepLinkTab) openTab(deepLinkTab);
 })();
 </script>
 
